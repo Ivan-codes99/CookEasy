@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "api_test": "node api_testing.js",
-    "dev": "nodemon server.js"
+    "start": "node src/server.js",
+    "api_test": "node src/api_testing.js",
+    "dev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
