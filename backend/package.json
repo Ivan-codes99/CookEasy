@@ -1,0 +1,33 @@
+{
+  "name": "cookeasy-backend",
+  "version": "1.0.0",
+  "description": "The goal of this cooking web app is to help users generate recipes based on the ingredients they currently have in their kitchen stock. The app will utilize AI to suggest meals and generate recipes (or fetch from website), reducing food waste and making meal planning more convenient. Users will be able to maintain a virtual kitchen stock.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ivan-codes99/CookEasy-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ivan-codes99/CookEasy-backend/issues"
+  },
+  "homepage": "https://github.com/Ivan-codes99/CookEasy-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
