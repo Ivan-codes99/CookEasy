@@ -1,7 +1,7 @@
 const mongoose = require(mongoose);
 const { v4: uuidv4 } = require('uuid');
 const ingredientSchema = require('./ingredientModel');
-const Recipe = require('./recipeModel');
+const recipe = require('./recipeModel');
 
 const userSchema = new mongoose.Schema({
     userID: {
