@@ -1,5 +1,5 @@
-import User from '../models/userModel.js';
-import jwt from 'jsonwebtoken';
+const User = require('../models/userModel.js');
+const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     const { name, email, password } = req.body;
@@ -24,12 +24,12 @@ const login = async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ message: 'Invalid email or password' });
 
-        const isMatch = (password == user.password)
+        const isMatch = (password === user.password)
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' }); // should change to 'Invalid email or password' when deployed
 
         const token = jwt.sign({ id: user.userID }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-        res.json({ token, user: { id: user.UserID, name: user.name, email: user.email } });
+        res.json({ token, user: { id: user.userID, name: user.name, email: user.email } });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
