@@ -26,12 +26,12 @@ const userSchema = new mongoose.Schema({
     },
 
     kitchenStock: {
-        type: [Ingredient.schema],
+        type: [Ingredient.Schema],
         default: []
     },
 
     savedRecipes: {
-        type: [Recipe.schema]
+        type: [Recipe.Schema]
     }
 
     //TODO: preferences, createdAt, updatedAt
