@@ -4,12 +4,18 @@ const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
 /**
  * Get recipe recommendation endpoint
  */
+
+//send a list of ingredients, 
 const getRecipeRecommendation = async (req, res) => { /// This is where the API Testing code will go
     try {
-        const ingredients = ["Tomato", "Onion", "Garlic", "Basil"];
+        const ingredients = ["tomato", "onion", "garlic", "basil", "rice", "oats", "flour", "baking powder", "baking soda", "yeast", "sugar", 
+                            "honey", "olive oil", "vinegar", "black beans", "tomatoes", "canned tuna", "ketchup", "mustard", "salt", "black pepper",
+                            "paprika", "oregano", "basil", "cinnamon", "milk", "butter", "cheddar cheese", "mozzarella cheese", "parmesan", "yogurt", "eggs",
+                            "apples", "bananas", "chicken breast", "ground beef", "shrimp", "blueberries", "mango", "tortillas", "sliced bread"]; // we don't have to use all ingredients
+        const tags = []     //example tags to test: breakfast, dinner, vegan, vegetarian, protein-heavy, keto-friendly
         const ingredientNames = ingredients.join(', ');
 
-        const prompt = `Suggest a recipe using: ${ingredientNames}. Provide a title and instructions.`;
+        const prompt = `Suggest a recipe using: ${ingredientNames}. You don't have to use all the ingredients. Make sure the recipe falls under the category(s) of ${tags}. Provide a title and instructions.`;
 
         const response = await openai.chat.completions.create({
             model: "gpt-4",
