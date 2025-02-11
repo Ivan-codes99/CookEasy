@@ -9,5 +9,4 @@ const ingredientSchema = new mongoose.Schema({
         addedAt: { type: Date, required: true },
 });
 
-const Ingredient = mongoose.model('Ingredient', ingredientSchema);
-module.exports = Ingredient;
+module.exports = ingredientSchema;

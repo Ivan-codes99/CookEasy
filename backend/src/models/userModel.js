@@ -1,7 +1,7 @@
 const mongoose = require(mongoose);
 const { v4: uuidv4 } = require('uuid');
-const Ingredient = require('ingredientModel');
-const Recipe = require('recipeModel');
+const ingredientSchema = require('./ingredientModel');
+const Recipe = require('./recipeModel');
 
 const userSchema = new mongoose.Schema({
     userID: {
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     },
 
     kitchenStock: {
-        type: [Ingredient.Schema],
+        type: [ingredientSchema],
         default: []
     },
 

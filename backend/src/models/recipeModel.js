@@ -9,5 +9,4 @@ const recipeSchema = new mongoose.Schema({
     //TODO: add (webLink, imageURL, AIGenerated, savedAt) keys
 });
 
-const Recipe = mongoose.model('Recipe', recipeSchema);
-module.exports = Recipe;
+module.exports = recipeSchema;
