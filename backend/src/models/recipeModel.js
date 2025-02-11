@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const recipeIngredient = require('recipeIngredient');
+const recipeIngredient = require('recipeIngredientModel');
 
 const recipeSchema = new mongoose.Schema({
     name: { type: String, required: true },
