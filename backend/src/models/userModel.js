@@ -4,13 +4,7 @@ const ingredientSchema = require('./ingredientModel');
 const Recipe = require('./recipeModel');
 
 const userSchema = new mongoose.Schema({
-    userID: {
-        type: String,
-        default: uuidv4,
-        required: true,
-        unique: true
-    },
-
+    
     name: {
         type: String,
         required: true
