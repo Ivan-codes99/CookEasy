@@ -4,7 +4,7 @@ const { getRecipeRecommendation, addIngredient, saveRecipe } = require('../contr
 const router = express.Router();
 
 router.get('/recommend', getRecipeRecommendation);
-router.post('/ingredient', addIngredient);
+router.post('/add', addIngredient);
 router.post('/save', saveRecipe);
 
 module.exports = router;

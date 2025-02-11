@@ -1,5 +1,7 @@
 const OpenAI = require('openai');
 const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
+const Ingredient = require('../models/ingredientModel');
+const Recipe = require('../models/recipeModel');
 
 /**
  * Get recipe recommendation endpoint
@@ -37,7 +39,29 @@ const getRecipeRecommendation = async (req, res) => { /// This is where the API 
  * Add ingredient endpoint
  */
 const addIngredient = async (req, res) => {
-    res.status(200).json({ message: 'Ingredient added', ingredient: req.body });
+    let { name, category, quantity } = req.body;
+
+    try {
+        name = name.trim();
+        category = category ? category.trim() : "Uncategorized";
+
+        // Check if ingredient already exists
+        let ingredient = await Ingredient.findOne({ name });
+
+        if (ingredient) {
+            ingredient.quantity = quantity;
+            await ingredient.save();
+            return res.status(200).json({ message: 'Ingredient updated successfully', ingredient });
+        }
+
+        // If not found, create a new ingredient
+        ingredient = new Ingredient({ name, category });
+        await ingredient.save();
+
+        res.status(201).json({ message: 'Ingredient added successfully', ingredient });
+    } catch (error) {
+        res.status(500).json({ message: 'Error adding/updating ingredient', error: error.message });
+    }
 };
 
 /**
