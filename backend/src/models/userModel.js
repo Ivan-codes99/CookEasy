@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
     },
 
     savedRecipes: {
-        type: [Recipe.Schema]
+        type: [Recipe.Schema],
+        default: []
     }
 
     //TODO: preferences, createdAt, updatedAt
