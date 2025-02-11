@@ -19,7 +19,7 @@ app.use(express.json()); // Parse JSON requests
 //connectDB();
 
 // Routes
-app.use('/api/recipes', recipeRoutes);
+app.use('/api', recipeRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');

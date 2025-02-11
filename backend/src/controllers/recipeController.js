@@ -12,11 +12,13 @@ const getRecipeRecommendation = async (req, res) => { /// This is where the API 
                             "honey", "olive oil", "vinegar", "black beans", "tomatoes", "canned tuna", "ketchup", "mustard", "salt", "black pepper",
                             "paprika", "oregano", "basil", "cinnamon", "milk", "butter", "cheddar cheese", "mozzarella cheese", "parmesan", "yogurt", "eggs",
                             "apples", "bananas", "chicken breast", "ground beef", "shrimp", "blueberries", "mango", "tortillas", "sliced bread"]; // we don't have to use all ingredients
-        const tags = []     //example tags to test: breakfast, dinner, vegan, vegetarian, protein-heavy, keto-friendly
+        const tags = ["vegan"]     //example tags to test: breakfast, dinner, vegan, vegetarian, protein-heavy, keto-friendly
         const ingredientNames = ingredients.join(', ');
+        const tagsNames = tags.join(', ');
 
-        const prompt = `Suggest a recipe using: ${ingredientNames}. You don't have to use all the ingredients. Make sure the recipe falls under the category(s) of ${tags}. Provide a title and instructions.`;
+        const prompt = `Suggest a recipe using: ${ingredientNames}. You don't have to use all the ingredients. Make sure the recipe falls under the category(s) of ${tagsNames}. Provide a title and instructions.`;
 
+        console.log(prompt)
         const response = await openai.chat.completions.create({
             model: "gpt-4",
             messages: [{ role: "user", content: prompt }],
