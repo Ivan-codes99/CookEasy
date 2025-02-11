@@ -22,12 +22,15 @@
   },
   "homepage": "https://github.com/Ivan-codes99/CookEasy-backend#readme",
   "dependencies": {
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "follow-redirects": "^1.15.9",
+    "helmet": "^8.0.0",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.0",
+    "morgan": "^1.10.0",
     "openai": "^4.83.0"
   },
   "devDependencies": {
