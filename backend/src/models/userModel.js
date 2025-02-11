@@ -1,13 +1,14 @@
-const mongoose = require(mongoose);
+const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const ingredientSchema = require('./ingredientModel');
-const recipe = require('./recipeModel');
+const Recipe = require('./recipeModel');
 
 const userSchema = new mongoose.Schema({
     userID: {
         type: String,
         default: uuidv4,
-        required: true
+        required: true,
+        unique: true
     },
 
     name: {

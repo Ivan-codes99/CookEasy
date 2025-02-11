@@ -6,9 +6,8 @@ const Recipe = require('../models/recipeModel');
 /**
  * Get recipe recommendation endpoint
  */
-
-//send a list of ingredients, 
-const getRecipeRecommendation = async (req, res) => { /// This is where the API Testing code will go
+// TODO: send a list of ingredients,
+const getRecipeRecommendation = async (req, res) => {
     try {
         const ingredients = ["tomato", "onion", "garlic", "basil", "rice", "oats", "flour", "baking powder", "baking soda", "yeast", "sugar", 
                             "honey", "olive oil", "vinegar", "black beans", "tomatoes", "canned tuna", "ketchup", "mustard", "salt", "black pepper",
@@ -55,7 +54,7 @@ const addIngredient = async (req, res) => {
         }
 
         // If not found, create a new ingredient
-        ingredient = new Ingredient({ name, category });
+        ingredient = new Ingredient({ name, category, quantity });
         await ingredient.save();
 
         res.status(201).json({ message: 'Ingredient added successfully', ingredient });
