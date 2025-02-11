@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-//const connectDB = require('./config/db');
+const connectDB = require('./config/db');
 const recipeRoutes = require('./routes/recipeRoutes');
 
 const PORT = process.env.PORT || 5000;
@@ -16,7 +16,7 @@ app.use(helmet()); // Security headers
 app.use(morgan('dev')); // Request logging
 app.use(express.json()); // Parse JSON requests
 
-//connectDB();
+connectDB();
 
 // Routes
 app.use('/api', recipeRoutes);
