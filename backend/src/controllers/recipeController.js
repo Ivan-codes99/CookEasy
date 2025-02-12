@@ -2,6 +2,8 @@ const OpenAI = require('openai');
 const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
 const Ingredient = require('../models/ingredientModel');
 const Recipe = require('../models/recipeModel');
+const User = require('../models/userModel');
+const { v4: uuidv4 } = require('uuid');
 
 /**
  * Get recipe recommendation endpoint
@@ -38,28 +40,25 @@ const getRecipeRecommendation = async (req, res) => {
  * Add ingredient endpoint
  */
 const addIngredient = async (req, res) => {
-    let { _id, name, category, quantity } = req.body;
+    let { _id, name, category, totalQuantity } = req.body;
 
     try {
-        name = name.trim();
-        category = category ? category.trim() : "Uncategorized";
+        const user = await User.findById(_id);
+        if (!user) return res.status(404).json({ message: "User not found" });
 
-        // Check if ingredient already exists
-        let ingredient = await Ingredient.findOne({ name });
-
-        if (ingredient) {
-            ingredient.quantity = quantity;
-            await ingredient.save();
-            return res.status(200).json({ message: 'Ingredient updated successfully', ingredient });
+        // Check if ingredient already exists in kitchen stock
+        const existingIngredient = user.kitchenStock.find(ingredient => ingredient.name === name);
+        if (existingIngredient) {
+            existingIngredient.totalQuantity += totalQuantity;
+            // TODO: update expirationDate logic
+        } else {
+            user.kitchenStock.push({ name, category, totalQuantity });
         }
 
-        // If not found, create a new ingredient
-        ingredient = new Ingredient({ name, category, quantity });
-        await ingredient.save();
-
-        res.status(201).json({ message: 'Ingredient added successfully', ingredient });
+        await user.save();
+        res.status(200).json({ message: "Ingredient added successfully", kitchenStock: user.kitchenStock });
     } catch (error) {
-        res.status(500).json({ message: 'Error adding/updating ingredient', error: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
 

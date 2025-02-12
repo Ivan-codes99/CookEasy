@@ -21,8 +21,9 @@ const userSchema = new mongoose.Schema({
     },
 
     kitchenStock: {
-        type: [ingredientSchema],
-        default: []
+        type: Map,
+        of: ingredientSchema,
+        default: {}
     },
 
     savedRecipes: {
