@@ -38,7 +38,7 @@ const getRecipeRecommendation = async (req, res) => {
  * Add ingredient endpoint
  */
 const addIngredient = async (req, res) => {
-    let { name, category, quantity } = req.body;
+    let { _id, name, category, quantity } = req.body;
 
     try {
         name = name.trim();
