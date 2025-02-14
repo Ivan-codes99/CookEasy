@@ -1,9 +1,6 @@
 const OpenAI = require('openai');
 const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
-const Ingredient = require('../models/ingredientModel');
-const Recipe = require('../models/recipeModel');
 const User = require('../models/userModel');
-const { v4: uuidv4 } = require('uuid');
 
 /**
  * Get recipe recommendation endpoint
