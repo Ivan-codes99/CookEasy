@@ -1,12 +1,13 @@
 const express = require('express');
-const { getRecipeRecommendation, addIngredient, deleteIngredient, saveRecipe } = require('../controllers/recipeController');
+const { getRecipeRecommendation, saveRecipe } = require('../controllers/recipeController');
 
 const router = express.Router();
 
 router.get('/recommend', getRecipeRecommendation);
-router.post('/add', addIngredient);
-//* I used patch not delete because the function does not delete the ingredient from the user's kitchenStock it decreases it, even if it reaches 0.
-router.patch('/delete', deleteIngredient); // TODO document and test in Postman
 router.post('/save', saveRecipe);
+// TODO: uncomment when logic for saving recipes is ready
+// router.delete('/remove', removeRecipe);
+// router.get('/get', getSavedRecipe);
+// router.get('/get-list', getAllSavedRecipes);
 
 module.exports = router;

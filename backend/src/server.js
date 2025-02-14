@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const recipeRoutes = require('./routes/recipeRoutes');
+const ingredientRoutes = require('./routes/ingredientRoutes');
 const authRoutes = require("./routes/authRoutes");
 
 const PORT = process.env.PORT || 5000;
@@ -19,7 +20,8 @@ app.use(express.json()); // Parse JSON requests
 connectDB();
 
 // Routes
-app.use('/api', recipeRoutes);
+app.use('/recipe', recipeRoutes);
+app.use('/ingredient', ingredientRoutes);
 app.use('/api', authRoutes);
 
 app.get('/', (req, res) => {
