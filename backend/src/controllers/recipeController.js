@@ -44,11 +44,12 @@ const getRecipeRecommendation = async (req, res) => {
 /**
  * Add ingredient endpoint
  */
+//! //* if the user is not found it returns "message": "Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
 const addIngredient = async (req, res) => {
     let { _id, name, category, quantity } = req.body;
 
     try {
-        const user = await User.findById(_id);
+        const user = await User.findById(_id); //TODO 
         if (!user) return res.status(404).json({ message: "User not found" });
 
         // Check if ingredient already exists in kitchen stock
@@ -57,7 +58,7 @@ const addIngredient = async (req, res) => {
 
             // Update quantity
             existingIngredient.quantity += quantity;
-            // TODO: update expirationDate logic with stock
+            // TODO: update expirationDate logic with stock 
         } else {
             user.kitchenStock.set(name, {
                 category,
