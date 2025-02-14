@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid'); //? I don't think we need this import anymore
 const ingredientSchema = require('./ingredientSchema');
-const Recipe = require('./recipeSchema');
+const RecipeSchema = require('./recipeSchema');
 
 const userSchema = new mongoose.Schema({
     
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     },
 
     savedRecipes: {
-        type: [Recipe.Schema],
+        type: [RecipeSchema], 
         default: []
     }
 

@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const recipeIngredient = require('./recipeIngredientSchema');
+const recipeIngredientSchema = require('./recipeIngredientSchema');
 
 const recipeSchema = new mongoose.Schema({
     name: { type: String, required: true },
     tags: [String],
-    ingredients: {type: [recipeIngredient.Schema]},
+    ingredients: {type: [recipeIngredientSchema]},
     instructions: { type: [String], required: true }
-    //TODO: add (webLink, imageURL, AIGenerated, savedAt) keys
+    //TODO: add attributes: webLink, imageURL, AIGenerated, savedAt
 });
 
 module.exports = recipeSchema;

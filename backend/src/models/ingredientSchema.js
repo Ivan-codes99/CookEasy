@@ -6,7 +6,7 @@ const ingredientSchema = new mongoose.Schema({ // * no name attribute because na
         quantity: { type: Number, required: true },
         //unit: { type: String, required: true },
         // TODO: implement stock
-        //stock: { type: [ingredientStock.Schema]},
+        //stock: { type: [ingredientStockSchema]},
 },{ _id: false });
 
 module.exports = ingredientSchema;
