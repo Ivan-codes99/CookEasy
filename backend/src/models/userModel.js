@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
-const ingredientSchema = require('./ingredientModel');
-const Recipe = require('./recipeModel');
+const ingredientSchema = require('./ingredientSchema');
+const Recipe = require('./recipeSchema');
 
 const userSchema = new mongoose.Schema({
     
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
     //TODO: preferences, createdAt, updatedAt
 })
 
-//TODO, method to hash the password before saving the user
+//TODO, method to hash the password when creating new user or when updating password
 
 const User = mongoose.model('User', userSchema); 
 module.exports = User;

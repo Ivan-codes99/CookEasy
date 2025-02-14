@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-//const ingredientStock = require("./ingredientStockModel");
+//const ingredientStock = require("./ingredientStockSchema");
 
-const ingredientSchema = new mongoose.Schema({
+const ingredientSchema = new mongoose.Schema({ // * no name attribute because name is the key in kitchenStock
         category: { type: String, required: true},
         quantity: { type: Number, required: true },
         //unit: { type: String, required: true },
