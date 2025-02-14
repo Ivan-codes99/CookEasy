@@ -72,6 +72,7 @@ const addIngredient = async (req, res) => {
     }
 };
 
+//TODO test this on Postman
 const deleteIngredient = async (req, res) => { // decreases quantity, doesn't delete from User's kitchen stock
     let { _id, name, category, quantity } = req.body;
 
