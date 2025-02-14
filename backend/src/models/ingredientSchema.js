@@ -5,7 +5,7 @@ const ingredientSchema = new mongoose.Schema({ // * no name attribute because na
         category: { type: String, required: true},
         quantity: { type: Number, required: true },
         //unit: { type: String, required: true },
-        // TODO: implement stock
+        // TODO: implement ingredientStock
         //stock: { type: [ingredientStockSchema]},
 },{ _id: false });
 

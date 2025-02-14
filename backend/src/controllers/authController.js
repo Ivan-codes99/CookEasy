@@ -2,8 +2,6 @@ const User = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
 //TODO verify email format
 
-//TODO fix this error when registering a user
-//! {"message": "E11000 duplicate key error collection: test.users index: userID_1 dup key: { userID: null }"}
 const register = async (req, res) => {
     const { name, email, password } = req.body;
 

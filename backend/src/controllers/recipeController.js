@@ -95,9 +95,7 @@ const deleteIngredient = async (req, res) => { // decreases quantity, doesn't de
     }
 };
 
-/**
- * Save a recipe endpoint
- */
+// save a recipe endpoint
 const saveRecipe = async (req, res) => {
     res.status(200).json({ message: 'Recipe saved', recipe: req.body });
 };
