@@ -36,5 +36,5 @@ const userSchema = new mongoose.Schema({
 
 //TODO, method to hash the password when creating new user or when updating password
 
-const User = mongoose.model('User', userSchema); 
+const User = mongoose.model('users', userSchema); 
 module.exports = User;
