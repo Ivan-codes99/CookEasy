@@ -17,7 +17,7 @@ const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL;
 
 const register = async (name: string, email: string, password: string) => {
     try {
-        const response = await axios.post(`${BACKEND_BASE_URL}`, {
+        const response = await axios.post(`${BACKEND_BASE_URL}/api/register`, {
             name,
             email,
             password
@@ -36,6 +36,30 @@ const register = async (name: string, email: string, password: string) => {
     }
 }
 
-export {register};
+const login = async (email: string, password: string) => {
+    try {
+        const response = await axios.post(`${BACKEND_BASE_URL}/api/login`, {
+            params: {
+                email,
+                password
+            }
+            
+        });
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            //backend responded with error
+            throw new Error(error.response.data.message || "Login failed.");
+        }
+        else {
+            //some other error
+            throw new Error("Something is not working. Maybe try again later");
+        }
+    }
+}
+
+
+
+export {register, login};
 
 
