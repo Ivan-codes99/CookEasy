@@ -110,7 +110,7 @@ const saveRecipe = async (req, res) => {
 };
 
 /**
- * Removed recipe endpoint
+ * Remove recipe endpoint
  */
 const removeRecipe = async (req, res) => {
     const { _id, recipeName } = req.body;
@@ -129,7 +129,7 @@ const removeRecipe = async (req, res) => {
 
         // Check if recipe exists in `savedRecipes`
         if (!user.savedRecipes.has(recipeName)) {
-            return res.status(404).json({ message: "Recipe not found in user's saved recipes" });
+            return res.status(404).json({ message: "Recipe not found in user's saved recipes" }); //*Should never reach here from frontend
         }
 
         // Delete the recipe from `savedRecipes`

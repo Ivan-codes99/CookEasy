@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 
     kitchenStock: {
         type: Map,
-        of: ingredientSchema,
+        of: ingredientSchema, //? Maybe change the key to be category instead of ingredient name, feels like that makes more sense
         default: {}
     },
 

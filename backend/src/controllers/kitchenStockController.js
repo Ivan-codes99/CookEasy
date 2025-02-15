@@ -34,7 +34,7 @@ const addIngredient = async (req, res) => {
 /**
  * Delete ingredient endpoint
  */
-const deleteIngredient = async (req, res) => {
+const deleteIngredient = async (req, res) => { //* Decreases ingredient quantity
     let { _id, name, quantity } = req.body;
 
     try {
@@ -65,8 +65,11 @@ const deleteIngredient = async (req, res) => {
 /**
  * Get ingredient stock endpoint
  */
+
+//*example url http://localhost:5000/ingredient/get-ingredient?_id=60d0fe4f5311236168a109ca&name=tomato
+//* I don't think this endpoint will be necessary in the actual app tbh
 const getIngredient = async (req, res) => {
-    let { _id, name } = req.body;
+    let { _id, name } = req.query;
 
     try {
         const user = await User.findById(_id);
@@ -90,7 +93,7 @@ const getIngredient = async (req, res) => {
  * Get all ingredients in kitchen stock endpoint
  */
 const getAllIngredients = async (req, res) => {
-    let { _id } = req.body;
+    let { _id } = req.query;
 
     try {
         const user = await User.findById(_id);

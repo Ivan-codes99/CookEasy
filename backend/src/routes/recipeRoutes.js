@@ -7,6 +7,6 @@ router.get('/recommend', getRecipeRecommendation);
 router.post('/save', saveRecipe);
 router.delete('/remove', removeRecipe);
 router.get('/get', getSavedRecipe);
-router.get('/get-list', getAllSavedRecipes);
+router.get('/get-all-recipes', getAllSavedRecipes);
 
 module.exports = router;
