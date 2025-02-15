@@ -1,6 +1,8 @@
 const User = require('../models/userModel');
 /*TODO addCategory
-  TODO deleteCategory */
+  TODO deleteCategory 
+  TODO deleteBatch 
+  TODO getEarliestExpiringBatch*/
 
 /*TODO Allow user to create category
   TODO Allow user to set default expiration date for category
