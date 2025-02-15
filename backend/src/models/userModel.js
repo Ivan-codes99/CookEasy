@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-//const { v4: uuidv4 } = require('uuid'); //? I don't think we need this import anymore
 const ingredientSchema = require('./ingredientSchema');
-const RecipeSchema = require('./recipeSchema');
+const recipeSchema = require('./recipeSchema');
 
 const userSchema = new mongoose.Schema({
-    
     name: {
         type: String,
         required: true
@@ -27,8 +25,9 @@ const userSchema = new mongoose.Schema({
     },
 
     savedRecipes: {
-        type: [RecipeSchema], 
-        default: []
+        type: Map,
+        of: recipeSchema,
+        default: {}
     }
 
     //TODO: preferences, createdAt, updatedAt
@@ -36,5 +35,5 @@ const userSchema = new mongoose.Schema({
 
 //TODO, method to hash the password when creating new user or when updating password
 
-const User = mongoose.model('users', userSchema); 
+const User = mongoose.model('users', userSchema);
 module.exports = User;
