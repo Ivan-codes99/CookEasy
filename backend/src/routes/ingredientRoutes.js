@@ -5,8 +5,7 @@ const router = express.Router();
 
 router.post('/add', addIngredient);
 router.patch('/delete', deleteIngredient);
-// TODO: might replaced the post methods to get methods once we add headers to HTTP calls
-router.post('/get', getIngredient);
-router.post('/get-list', getAllIngredients);
+router.get('/get', getIngredient);
+router.get('/get-list', getAllIngredients);
 
 module.exports = router;
