@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const ingredientSchema = require('./ingredientSchema');
 const recipeSchema = require('./recipeSchema');
 
+/*TODO For future functionality, could make the user be able to save and modify kitchenStock "profiles"
+For example a "vegan" kitchenStock profile with default categories of "Vegan_Dairy_Alternatives", "Vegan_Meat_Alternatives*/
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,11 +19,31 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+    
     kitchenStock: {
         type: Map,
-        of: ingredientSchema, //? Maybe change the key to be category instead of ingredient name, feels like that makes more sense
-        default: {}
+        of: {
+            type: Map,
+            of: ingredientSchema
+        },
+        default: {
+            Meats: {},
+            Poultry: {},
+            Seafood: {},
+            Plant_based_proteins: {},
+            Dairy: {},
+            Legumes_and_beans: {},
+            Fruits: {},
+            Vegetables: {},
+            Oils_and_Fats: {},
+            Spices_and_Seasonings: {},
+            Grains: {},
+            Baking: {},
+            Sweeteners: {},
+            Beverages: {},
+            Miscellaneous: {},
+            Uncategorized: {}
+        }
     },
 
     savedRecipes: {

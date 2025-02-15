@@ -1,31 +1,49 @@
 const User = require('../models/userModel');
+/*TODO addCategory
+  TODO deleteCategory */
+
+/*TODO Allow user to create category
+  TODO Allow user to set default expiration date for category
+*/
 
 /**
  * Add ingredient endpoint
  */
+
 //! //* if the user is not found it returns "message": "Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
 const addIngredient = async (req, res) => {
-    let { _id, name, category, quantity } = req.body;
+    let { _id, category, ingredient } = req.body;
+    const { name, batch } = ingredient;
+    const { quantity, unit, size, expirationDate } = batch || {};
 
     try {
-        const user = await User.findById(_id); //TODO 
+        const user = await User.findById(_id);
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        // Check if ingredient already exists in kitchen stock
-        if (user.kitchenStock.has(name)) {
-            var existingIngredient = user.kitchenStock.get(name);
+        // Check if the category exists in kitchen stock
+        if (!user.kitchenStock.has(category)) {
+            return res.status(400).json({ message: `Category ${category} does not exist in kitchen stock` });
+        }
 
-            // Update quantity
-            existingIngredient.quantity += quantity;
-            // TODO: update expirationDate logic with stock 
+        const categoryMap = user.kitchenStock.get(category);
+
+        // Check if the ingredient already exists in the category
+        if (categoryMap.has(name)) {
+            const existingIngredient = categoryMap.get(name);
+
+            // Update existing ingredient by adding a new batch
+            console.log("Adding new batch to existing ingredient");
+            existingIngredient.batches.push({ quantity, unit, size, expirationDate });
         } else {
-            user.kitchenStock.set(name, {
-                category,
-                quantity: quantity
+            // Add new ingredient with the provided batch
+            console.log("Adding new ingredient");
+            categoryMap.set(name, {
+                batches: [{ quantity, unit, size, expirationDate }]
             });
         }
+
         await user.save();
-        res.status(200).json({ message: "Ingredient added successfully", ingredient: existingIngredient });
+        res.status(200).json({ message: "Ingredient added successfully", kitchenStock: user.kitchenStock });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
