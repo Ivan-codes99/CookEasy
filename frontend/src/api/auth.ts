@@ -1,19 +1,7 @@
-/*
- * Backend Base URL: http://localhost:5000
- * Backend Register API Endpoint: http://localhost:5000/api/register
- * Backend Login API Endpoint: http://localhost:5000/api/login
- */
-
-/* 
- * Backend register function expects req with name, email, password
-*/
-
-/* 
- * Backend login function expects req with email, password
-*/
-import 'dotenv/config';
+require('dotenv').config({ path: '../.env' }); //! in an actual build this should be .config()
 import axios from "axios";
-const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL;
+
+const BACKEND_BASE_URL = process.env.EXPO_PUBLIC_BACKEND_BASE_URL;
 
 const register = async (name: string, email: string, password: string) => {
     try {
@@ -25,6 +13,7 @@ const register = async (name: string, email: string, password: string) => {
 
         return response.data;
     }  catch (error: any) {
+        console.log(error)
         if (error.response) {
             //backend responded with error
             throw new Error(error.response.data.message || "Registration failed.");
@@ -39,12 +28,10 @@ const register = async (name: string, email: string, password: string) => {
 const login = async (email: string, password: string) => {
     try {
         const response = await axios.post(`${BACKEND_BASE_URL}/api/login`, {
-            params: {
-                email,
-                password
-            }
-            
+            email,
+            password
         });
+        
         return response.data;
     } catch (error: any) {
         if (error.response) {
@@ -58,8 +45,4 @@ const login = async (email: string, password: string) => {
     }
 }
 
-
-
 export {register, login};
-
-
