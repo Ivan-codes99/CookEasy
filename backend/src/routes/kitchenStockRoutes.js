@@ -1,5 +1,5 @@
 const express = require('express');
-const { addIngredient, deleteIngredient, getIngredient, getAllIngredients } = require('../controllers/kitchenStockController');
+const { addIngredient, addCategory, deleteIngredient, getIngredient, getAllIngredients } = require('../controllers/kitchenStockController');
 
 const router = express.Router();
 /*
@@ -9,7 +9,7 @@ const router = express.Router();
   TODO Add expirationDate to a batch, 
   TODO 
 */
-router.post('/new-category');
+router.post('/add-category', addCategory);
 router.delete('/delete-category');
 
 router.post('/add-ingredient', addIngredient);

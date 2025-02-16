@@ -1,56 +1,79 @@
 const User = require('../models/userModel');
-/*TODO addCategory
-  TODO deleteCategory 
-  TODO deleteBatch 
-  TODO getEarliestExpiringBatch*/
-
-/*TODO Allow user to create category
-  TODO Allow user to set default shelf life date for category, this can be sent from frontend I think
-    -->default expiration date will be day added + default shelf life
+/* 
+ !if the user is not found it returns "message": 
+ !"Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
+*/
+/*
+  TODO addCategory
+  TODO deleteCategory
+  TODO addBatch
+  TODO deleteBatch (low priority for now)
+  TODO other batch methods (low priority for now)
+  TODO toggleCategoryExcluded
+  TODO toggleIngredientExcluded
+  TODO getEarliestExpiringBatch
+  TODO Add ingredient, category should always be specified, Uncategorized is a category
+  TODO Add expirationDate to a batch, 
+  TODO Implement batch merging logic
+       ?Should user be able to have the same ingredient in different categories?
 */
 
 /**
  * Add ingredient endpoint
  */
 
-//! //* if the user is not found it returns "message": "Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
-const addIngredient = async (req, res) => {
-    let { _id, category, ingredient } = req.body;
-    const { name, batch } = ingredient;
-    const { quantity, unit, size, expirationDate } = batch || {};
 
+const addIngredient = async (req, res) => { //We just need _id, category, and ingredient
+    let {_id, category, ingredient} = req.body;
+  
     try {
-        const user = await User.findById(_id);
-        if (!user) return res.status(404).json({ message: "User not found" });
-
-        // Check if the category exists in kitchen stock
-        if (!user.kitchenStock.has(category)) {
-            return res.status(400).json({ message: `Category ${category} does not exist in kitchen stock` });
-        }
-
-        const categoryMap = user.kitchenStock.get(category);
-
-        // Check if the ingredient already exists in the category
-        if (categoryMap.has(name)) {
-            const existingIngredient = categoryMap.get(name);
-
-            // Update existing ingredient by adding a new batch
-            console.log("Adding new batch to existing ingredient");
-            existingIngredient.batches.push({ quantity, unit, size, expirationDate });
-        } else {
-            // Add new ingredient with the provided batch
-            console.log("Adding new ingredient");
-            categoryMap.set(name, {
-                batches: [{ quantity, unit, size, expirationDate }]
-            });
-        }
-
-        await user.save();
-        res.status(200).json({ message: "Ingredient added successfully", kitchenStock: user.kitchenStock });
+      const user = await User.findById(_id);
+      
+      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+  
+      //*This should never really happen. In the app the user should add an ingredient under a Category/Food Group tab
+      if (!user.kitchenStock.has(category)) {//checking category exists
+        return res.status(400).json({ message: `Category ${category} does not exist in kitchen stock` });
+      } 
+  
+      const categoryMap = user.kitchenStock.get(category);
+      if (categoryMap.ingredients.has(ingredient)) { //checking ingredient exists
+        return res.status(400).json({ message: `Ingredient ${ingredient} already exists, create new batch instead`})
+      }
+      else {
+        categoryMap.ingredients.set(ingredient, {}) //adding ingredient
+      }
+      await user.save();
+      res.status(200).json({ message: `Ingredient: ${ingredient} added to ${category} successfully supposedly lol`});
+  
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message});
     }
-};
+  
+  }
+
+  const addCategory = async (req, res) => { //We just need _id, and category
+    let {_id, category} = req.body;
+  
+    try {
+      const user = await User.findById(_id);
+      
+      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+  
+      
+      if (user.kitchenStock.has(category)) { //checking category exists
+        return res.status(400).json({ message: `Category ${category} already exists in kitchen stock` });
+      } 
+  
+      user.kitchenStock.set(category, {});
+      await user.save();
+      res.status(200).json({ message: `Category: ${category} added to kitchen stock successfully supposedly lol`});
+  
+    } catch (error) {
+      res.status(500).json({ message: error.message});
+    }
+  
+  }
 
 /**
  * Delete ingredient endpoint
@@ -130,4 +153,4 @@ const getAllIngredients = async (req, res) => {
     }
 };
 
-module.exports = { addIngredient, deleteIngredient, getIngredient, getAllIngredients };
+module.exports = { addIngredient, addCategory, deleteIngredient, getIngredient, getAllIngredients };
