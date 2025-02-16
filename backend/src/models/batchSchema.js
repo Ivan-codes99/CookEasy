@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ingredientBatchSchema = new mongoose.Schema({
+const batchSchema = new mongoose.Schema({
     quantity: { 
         type: Number,
         validate: {
@@ -37,4 +37,4 @@ const ingredientBatchSchema = new mongoose.Schema({
     }
 }, { _id: false });
 
-module.exports = ingredientBatchSchema;
+module.exports = batchSchema;

@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const ingredientBatchSchema = require("./ingredientBatchSchema");
+const batchSchema = require("./batchSchema");
 
-const ingredientSchema = new mongoose.Schema({ // * no category attribute because category is the key in kitchenStock
+const ingredientSchema = new mongoose.Schema({ 
+        exclude: {type: Boolean, default: false, required: true},
         batches: {
-                type: [ingredientBatchSchema],
+                type: [batchSchema],
                 default: []
         }
 },{ _id: false });

@@ -5,7 +5,8 @@ const User = require('../models/userModel');
   TODO getEarliestExpiringBatch*/
 
 /*TODO Allow user to create category
-  TODO Allow user to set default expiration date for category
+  TODO Allow user to set default shelf life date for category, this can be sent from frontend I think
+    -->default expiration date will be day added + default shelf life
 */
 
 /**
