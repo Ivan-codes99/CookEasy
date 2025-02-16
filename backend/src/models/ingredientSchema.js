@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-//const ingredientStock = require("./ingredientStockSchema");
+const batchSchema = require("./batchSchema");
 
-const ingredientSchema = new mongoose.Schema({ // * no name attribute because name is the key in kitchenStock
-        category: { type: String, required: true},
-        quantity: { type: Number, required: true },
-        //unit: { type: String, required: true },
-        // TODO: implement ingredientStock
-        //stock: { type: [ingredientStockSchema]},
+const ingredientSchema = new mongoose.Schema({ 
+        exclude: {type: Boolean, default: false, required: true},
+        batches: {
+                type: [batchSchema],
+                default: []
+        }
 },{ _id: false });
 
 module.exports = ingredientSchema;
