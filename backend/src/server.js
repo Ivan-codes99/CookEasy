@@ -5,8 +5,10 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const recipeRoutes = require('./routes/recipeRoutes');
-const kitchenStockRoutes = require('./routes/kitchenStockRoutes');
 const authRoutes = require("./routes/authRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const ingredientRoutes = require("./routes/ingredientRoutes");
+const batchRoutes = require("./routes/batchRoutes");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -21,8 +23,9 @@ connectDB();
 
 // Routes
 app.use('/recipe', recipeRoutes);
-app.use('/kitchenStock', kitchenStockRoutes);
 app.use('/auth', authRoutes);
+app.use('/ingredient', ingredientRoutes);
+app.use('/category', categoryRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
