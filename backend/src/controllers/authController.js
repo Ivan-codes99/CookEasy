@@ -1,7 +1,10 @@
 const User = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
 
-
+/* 
+ !if the user is not found it returns "message": 
+ !"Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
+*/
 //TODO verify email format
 const register = async (req, res) => {
     const { name, email, password } = req.body;

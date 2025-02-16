@@ -56,6 +56,7 @@ const getRecipeRecommendation = async (req, res) => {
  * Save recipe endpoint
  */
 // TODO: recipes's ingredients are being store with ids (Needs fix)
+//TODO: request body should be empty for get methods, pass in necessary fields as url parameters
 const saveRecipe = async (req, res) => {
     const { _id, recipeResponse } = req.body;
 
