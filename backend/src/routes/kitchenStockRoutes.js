@@ -1,5 +1,5 @@
 const express = require('express');
-const { addIngredient, addCategory, deleteIngredient, getIngredient, getAllIngredients } = require('../controllers/kitchenStockController');
+const { addCategory, deleteCategory, addIngredient, deleteIngredient, getIngredient, getAllIngredients } = require('../controllers/kitchenStockController');
 
 const router = express.Router();
 /*
@@ -10,7 +10,7 @@ const router = express.Router();
   TODO 
 */
 router.post('/add-category', addCategory);
-router.delete('/delete-category');
+router.delete('/delete-category', deleteCategory);
 
 router.post('/add-ingredient', addIngredient);
 router.patch('/delete', deleteIngredient);

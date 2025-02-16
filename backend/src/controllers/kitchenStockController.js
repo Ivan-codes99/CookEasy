@@ -18,12 +18,58 @@ const User = require('../models/userModel');
        ?Should user be able to have the same ingredient in different categories?
 */
 
-/**
+
+
+  const addCategory = async (req, res) => { //We just need _id, and category
+    let {_id, category} = req.body;
+  
+    try {
+      const user = await User.findById(_id);
+      
+      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+  
+      
+      if (user.kitchenStock.has(category)) { //checking category exists
+        return res.status(400).json({ message: `Category ${category} already exists in kitchen stock` });
+      } 
+  
+      user.kitchenStock.set(category, {});
+      await user.save();
+      res.status(200).json({ message: `Category: ${category} added to kitchen stock successfully supposedly lol`});
+  
+    } catch (error) {
+      res.status(500).json({ message: error.message});
+    }
+  
+  }
+
+  const deleteCategory = async (req, res) => { //We just need _id, and category
+    let {_id, category} = req.body;
+  
+    try {
+      const user = await User.findById(_id);
+      
+      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+  
+      //* This ideally would never evaluate to true
+      if (!user.kitchenStock.has(category)) { //checking category exists
+        return res.status(400).json({ message: `Category ${category} doesn't exist in kitchen stock` });
+      } 
+  
+      user.kitchenStock.delete(category);
+      await user.save();
+      res.status(200).json({ message: `Category: ${category} deleted from kitchen stock successfully supposedly lol`});
+  
+    } catch (error) {
+      res.status(500).json({ message: error.message});
+    }
+  
+  }
+
+/*
  * Add ingredient endpoint
  */
-
-
-const addIngredient = async (req, res) => { //We just need _id, category, and ingredient
+  const addIngredient = async (req, res) => { //We just need _id, category, and ingredient
     let {_id, category, ingredient} = req.body;
   
     try {
@@ -45,29 +91,6 @@ const addIngredient = async (req, res) => { //We just need _id, category, and in
       }
       await user.save();
       res.status(200).json({ message: `Ingredient: ${ingredient} added to ${category} successfully supposedly lol`});
-  
-    } catch (error) {
-      res.status(500).json({ message: error.message});
-    }
-  
-  }
-
-  const addCategory = async (req, res) => { //We just need _id, and category
-    let {_id, category} = req.body;
-  
-    try {
-      const user = await User.findById(_id);
-      
-      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
-  
-      
-      if (user.kitchenStock.has(category)) { //checking category exists
-        return res.status(400).json({ message: `Category ${category} already exists in kitchen stock` });
-      } 
-  
-      user.kitchenStock.set(category, {});
-      await user.save();
-      res.status(200).json({ message: `Category: ${category} added to kitchen stock successfully supposedly lol`});
   
     } catch (error) {
       res.status(500).json({ message: error.message});
@@ -153,4 +176,4 @@ const getAllIngredients = async (req, res) => {
     }
 };
 
-module.exports = { addIngredient, addCategory, deleteIngredient, getIngredient, getAllIngredients };
+module.exports = { addCategory, deleteCategory, addIngredient, deleteIngredient, getIngredient, getAllIngredients };
