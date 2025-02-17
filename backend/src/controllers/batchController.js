@@ -11,7 +11,9 @@ const User = require('../models/userModel');
   TODO Implement batch merging logic
   */
  
-
+  /*
+ * Add batch endpoint
+ */
   //* Not gonna check if category or ingredient exists at least for now, since irl that shouldn't happen
   const addBatch = async (req, res) => { //We just need _id, category, ingredient, and a batch map
      let {_id, category, ingredient, batch} = req.body;
@@ -29,8 +31,11 @@ const User = require('../models/userModel');
      }
    
    }
-
-   //* Not gonna check if category or ingredient exists at least for now, since irl that shouldn't happen
+   
+  /*
+ * Delete batch endpoint
+ */
+  //* Not gonna check if category or ingredient exists at least for now, since irl that shouldn't happen
   //! We're just gonna pop for now
   const deleteBatch = async (req, res) => { //We just need _id, category, ingredient
     let {_id, category, ingredient} = req.body;

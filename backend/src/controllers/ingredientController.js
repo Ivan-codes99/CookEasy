@@ -1,7 +1,7 @@
 const User = require('../models/userModel')
 
 /*
-  TODO toggleIngredientExcluded
+  TODO 
        ?Should user be able to have the same ingredient in different categories?
        ! Use .get() when accessing properties in a Map instead of bracket notation.
 */
@@ -62,6 +62,9 @@ const deleteIngredient = async (req, res) => { //* deletes ingredient
     }
 };
 
+/*
+ * Toggle ingredient exclusion endpoint
+ */
 const toggleIngredientExcluded = async (req, res) => { //we just need _id, category, and ingredient
   let {_id, category, ingredient} = req.body;
 

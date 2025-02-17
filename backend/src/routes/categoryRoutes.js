@@ -3,8 +3,8 @@ const { addCategory, deleteCategory, toggleCategoryExcluded} = require('../contr
 
 const router = express.Router();
 /*
-  TODO When deleting, give user option to move ingredients to Uncategorized, user cannot delete Uncategorized
-  TODO Add new category
+  TODO When deleting, give user option to move ingredients to Uncategorized, 
+  TODO user cannot delete Uncategorized
   TODO Modify category name
 */
 

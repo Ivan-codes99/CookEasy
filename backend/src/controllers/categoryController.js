@@ -10,7 +10,10 @@ const User = require('../models/userModel');
   TODO Implement batch merging logic
        ?Should user be able to have the same ingredient in different categories?
 */
-
+  
+/*
+ * Add category endpoint
+ */
   const addCategory = async (req, res) => { //We just need _id, and category
     let {_id, category} = req.body;
   
@@ -32,7 +35,9 @@ const User = require('../models/userModel');
     }
   
   }
-
+/*
+ * Delete category endpoint
+ */
   const deleteCategory = async (req, res) => { //We just need _id, and category
     let {_id, category} = req.body;
   
@@ -55,7 +60,9 @@ const User = require('../models/userModel');
     }
   
   }
-
+/*
+ * Toggle category exclusion endpoint
+ */
   const toggleCategoryExcluded = async (req, res) => { //we just need _id, and category
     let {_id, category} = req.body;
   

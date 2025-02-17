@@ -3,9 +3,7 @@ const { addIngredient, deleteIngredient, toggleIngredientExcluded } = require('.
 
 const router = express.Router();
 /*
-  TODO Add ingredient, category should always be specified, Uncategorized is a category
-  TODO delete ingredient
-  
+
 */
 
 router.post('/add', addIngredient);
