@@ -1,5 +1,5 @@
 const express = require('express');
-const { addCategory, deleteCategory, } = require('../controllers/categoryController');
+const { addCategory, deleteCategory, toggleCategoryExcluded} = require('../controllers/categoryController');
 
 const router = express.Router();
 /*
@@ -7,7 +7,9 @@ const router = express.Router();
   TODO Add new category
   TODO Modify category name
 */
+
 router.post('/add', addCategory);
 router.delete('/delete', deleteCategory);
+router.patch('exclusion', toggleCategoryExcluded);
 
 module.exports = router;
