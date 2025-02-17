@@ -69,8 +69,8 @@ const toggleIngredientExcluded = async (req, res) => { //we just need _id, categ
     const user = await User.findById(_id);
     if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
     
-    state = user.kitchenStock.get(category).ingredients.get(ingredient);
-    user.kitchenStock.get(category).ingredients.get(ingredient) = !state;
+    state = user.kitchenStock.get(category).ingredients.get(ingredient).exclude;
+    user.kitchenStock.get(category).ingredients.get(ingredient).exclude = !state;
 
     await user.save();
     res.status(200).json({ message: `Ingredient: ${ingredient} exclusion status set to ${!state} successfully supposedly lol` });

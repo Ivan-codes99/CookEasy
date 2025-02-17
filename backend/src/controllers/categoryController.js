@@ -63,7 +63,7 @@ const User = require('../models/userModel');
       const user = await User.findById(_id);
       if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
       
-      state = user.kitchenStock.get(category);
+      state = user.kitchenStock.get(category).exclude;
       user.kitchenStock.get(category).exclude = !state;
   
       await user.save();
