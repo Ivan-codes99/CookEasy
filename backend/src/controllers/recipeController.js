@@ -3,6 +3,10 @@ const openai = new OpenAI({ apiKey: process.env.OPEN_AI_API_KEY });
 const User = require('../models/userModel');
 const Recipe = require('../models/recipeSchema');
 
+/*
+! Use .get() when accessing properties in a Map instead of bracket notation.
+*/
+
 /**
  * Get recipe recommendation endpoint
  */
