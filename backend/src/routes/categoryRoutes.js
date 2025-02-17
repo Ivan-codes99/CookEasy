@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post('/add', addCategory);
 router.delete('/delete', deleteCategory);
-router.patch('exclusion', toggleCategoryExcluded);
+router.patch('/exclusion', toggleCategoryExcluded);
 
 module.exports = router;
