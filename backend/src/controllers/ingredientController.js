@@ -1,8 +1,9 @@
 const User = require('../models/userModel')
 
 /*
-  TODO toggleIngredientExcluded
+  TODO 
        ?Should user be able to have the same ingredient in different categories?
+       ! Use .get() when accessing properties in a Map instead of bracket notation.
 */
 
 /*
@@ -61,4 +62,25 @@ const deleteIngredient = async (req, res) => { //* deletes ingredient
     }
 };
 
-module.exports = {addIngredient, deleteIngredient};
+/*
+ * Toggle ingredient exclusion endpoint
+ */
+const toggleIngredientExcluded = async (req, res) => { //we just need _id, category, and ingredient
+  let {_id, category, ingredient} = req.body;
+
+  try {
+    const user = await User.findById(_id);
+    if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+    
+    state = user.kitchenStock.get(category).ingredients.get(ingredient).exclude;
+    user.kitchenStock.get(category).ingredients.get(ingredient).exclude = !state;
+
+    await user.save();
+    res.status(200).json({ message: `Ingredient: ${ingredient} exclusion status set to ${!state} successfully supposedly lol` });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded};

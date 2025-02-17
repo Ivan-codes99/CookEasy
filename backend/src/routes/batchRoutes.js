@@ -1,14 +1,12 @@
+const express = require('express');
+const { addBatch, deleteBatch } = require('../controllers/batchController');
+
+const router = express.Router();
 /*
-  TODO //?changeCategoryName
-  TODO 
-  TODO addBatch
-  TODO deleteBatch (low priority for now)
-  TODO other batch methods (low priority for now)
-  TODO toggleCategoryExcluded
-  TODO toggleIngredientExcluded
-  TODO getEarliestExpiringBatch
-  TODO Add ingredient, category should always be specified, Uncategorized is a category
-  TODO Add expirationDate to a batch, 
-  TODO Implement batch merging logic
-       ?Should user be able to have the same ingredient in different categories?
-  */
+  TODO Add new batch
+  TODO Delete batch
+*/
+router.post('/add', addBatch);
+router.delete('/delete', deleteBatch);
+
+module.exports = router;

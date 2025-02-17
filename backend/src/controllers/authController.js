@@ -4,8 +4,12 @@ const jwt = require('jsonwebtoken');
 /* 
  !if the user is not found it returns "message": 
  !"Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
+ ! Use .get() when accessing properties in a Map instead of bracket notation.
 */
-//TODO verify email format
+
+/*
+ * Register user endpoint
+ */
 const register = async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -22,6 +26,9 @@ const register = async (req, res) => {
     }
 };
 
+/*
+ * Login user endpoint
+ */
 const login = async (req, res) => {
     const { email, password } = req.body;
 

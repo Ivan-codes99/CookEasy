@@ -10,7 +10,10 @@ const User = require('../models/userModel');
   TODO Implement batch merging logic
        ?Should user be able to have the same ingredient in different categories?
 */
-
+  
+/*
+ * Add category endpoint
+ */
   const addCategory = async (req, res) => { //We just need _id, and category
     let {_id, category} = req.body;
   
@@ -19,7 +22,6 @@ const User = require('../models/userModel');
       
       if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
   
-      
       if (user.kitchenStock.has(category)) { //checking category exists
         return res.status(400).json({ message: `Category ${category} already exists in kitchen stock` });
       } 
@@ -33,7 +35,9 @@ const User = require('../models/userModel');
     }
   
   }
-
+/*
+ * Delete category endpoint
+ */
   const deleteCategory = async (req, res) => { //We just need _id, and category
     let {_id, category} = req.body;
   
@@ -56,5 +60,25 @@ const User = require('../models/userModel');
     }
   
   }
-
-  module.exports = {addCategory, deleteCategory}
+/*
+ * Toggle category exclusion endpoint
+ */
+  const toggleCategoryExcluded = async (req, res) => { //we just need _id, and category
+    let {_id, category} = req.body;
+  
+    try {
+      const user = await User.findById(_id);
+      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+      
+      state = user.kitchenStock.get(category).exclude;
+      user.kitchenStock.get(category).exclude = !state;
+  
+      await user.save();
+      res.status(200).json({ message: `Category: ${category} exclusion status set to ${!state} successfully supposedly lol` });
+  
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+  
+  module.exports = { addCategory, deleteCategory, toggleCategoryExcluded };

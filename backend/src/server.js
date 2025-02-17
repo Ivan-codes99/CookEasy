@@ -26,6 +26,7 @@ app.use('/recipe', recipeRoutes);
 app.use('/auth', authRoutes);
 app.use('/ingredient', ingredientRoutes);
 app.use('/category', categoryRoutes);
+app.use('/batch', batchRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
