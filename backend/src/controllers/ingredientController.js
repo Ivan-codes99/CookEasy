@@ -106,12 +106,13 @@ const toggleIngredientExcluded = async (req, res) => { //we just need _id, categ
         }
       }
 
-      res.status(200).json({message: "Valid ingredients retrieved"});
+      res.status(200).json({message: "Valid ingredients retrieved",
+        valid_ingredients : valid_ingredients
+      });
 
     } catch(error) {
       res.status(500).json({message: error.message});
     }
-    return valid_ingredients;
   }
 
 module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients};
