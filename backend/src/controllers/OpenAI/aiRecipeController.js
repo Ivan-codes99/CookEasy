@@ -47,12 +47,17 @@ const generateRecipe = async (req, res) => {
       presence_penalty: 0
     });
 
-    console.log("OpenAI response:", response); // Log the entire response
+    console.log("Raw OpenAI response:", response);
 
-    // Extract the message content from the response
-    const messageContent = response.choices[0].message;
+    // Extract the assistant's message content
+    const messageContent = response.choices[0].message.content;
 
-    res.status(200).json(messageContent);
+    // Parse the JSON response
+    const assistantResponse = JSON.parse(messageContent);
+
+    console.log("Parsed OpenAI assistant response:", assistantResponse); // Log the entire response
+
+    res.status(200).json(assistantResponse);
   } catch (error) {
     console.error("Error generating recipe:", error); // Log the error
     res.status(500).json({ message: error.message });
