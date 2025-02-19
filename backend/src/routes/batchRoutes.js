@@ -1,5 +1,5 @@
 const express = require('express');
-const { addBatch, deleteBatch } = require('../controllers/batchController');
+const { addBatch, deleteBatch } = require('../controllers/kitchenStock/batchController');
 
 const router = express.Router();
 /*
