@@ -9,6 +9,6 @@ const router = express.Router();
 router.post('/add', addIngredient);
 router.delete('/delete', deleteIngredient);
 router.patch('/exclusion', toggleIngredientExcluded);
-router.get('validIngredients', getValidIngredients);
+router.get('/validIngredients', getValidIngredients);
 
 module.exports = router;

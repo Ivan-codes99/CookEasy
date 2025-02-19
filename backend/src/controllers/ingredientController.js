@@ -88,7 +88,7 @@ const toggleIngredientExcluded = async (req, res) => { //we just need _id, categ
   *getValidIngredients endpoint
   */
   const getValidIngredients = async (req, res) => {
-    const {_id } = req.params;
+    const {_id } = req.query;
     
     try {
       const valid_ingredients = new Map();
