@@ -9,7 +9,6 @@ const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const ingredientRoutes = require("./routes/ingredientRoutes");
 const batchRoutes = require("./routes/batchRoutes");
-
 const PORT = process.env.PORT || 5000;
 const app = express();
 

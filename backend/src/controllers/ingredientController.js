@@ -65,6 +65,7 @@ const deleteIngredient = async (req, res) => { //* deletes ingredient
 /*
  * Toggle ingredient exclusion endpoint
  */
+//!modify validIngredients
 const toggleIngredientExcluded = async (req, res) => { //we just need _id, category, and ingredient
   let {_id, category, ingredient} = req.body;
 
@@ -83,4 +84,34 @@ const toggleIngredientExcluded = async (req, res) => { //we just need _id, categ
   }
 }
 
-module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded};
+  /*
+  *getValidIngredients endpoint
+  */
+  const getValidIngredients = async (req, res) => {
+    const {_id } = req.params;
+    
+    try {
+      const valid_ingredients = new Map();
+      const user = await User.findById(_id);
+      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+
+      for (let [categoryName, categoryData] of user.kitchenStock.entries()) {
+        if (!categoryData.exclude) {
+
+          for(let [ingredientName, ingredientData] of categoryData.ingredients.entries()) {
+            if(!ingredientData.exclude) {
+              valid_ingredients.set(ingredientName, ingredientData);
+            }
+          }
+        }
+      }
+
+      res.status(200).json({message: "Valid ingredients retrieved"});
+
+    } catch(error) {
+      res.status(500).json({message: error.message});
+    }
+    return valid_ingredients;
+  }
+
+module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients};
