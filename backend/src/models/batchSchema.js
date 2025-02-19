@@ -13,23 +13,40 @@ const batchSchema = new mongoose.Schema({
     },
     unit: { 
         type: String,
+        enum: [
+                "lb",
+                "lbs",
+                "oz",
+                "fl oz",
+                "count",
+                "gallon",
+                "cup",
+                "tbsp",
+                "tsp",
+                "pinch",
+                "dash",
+                "clove",
+                "cloves",
+                "sprig",
+                "sprigs",
+                "slice",
+                "slices",
+                "can",
+                "cans",
+                "bar",
+                "bars",
+                "pack",
+                "packs",
+                "stick",
+                "sticks",
+                "bunch"
+              ],
         validate: {
             validator: function(value) {
                 // Ensure that unit is provided only if quantity is specified
                 return !value || (value && this.quantity);
             },
             message: 'Unit cannot be provided if quantity is not specified.'
-        }
-    },
-    size: {
-        type: String,
-        enum: ['tiny', 'small', 'average', 'big', 'humongous'],
-        validate: {
-            validator: function(value) {
-                // Ensure that size is provided only if unit is 'count'
-                return !value || (this.unit === 'count');
-            },
-            message: 'Size can only be provided if unit is "count".'
         }
     },
     expirationDate: {

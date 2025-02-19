@@ -1,11 +1,17 @@
 const User = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
+const {fetchValidIngredients} = require('./kitchenStock/ingredientController.js');
+const {getIncludedIngredients} = require('./OpenAI/includedIngredientsController.js');
 
 /* 
  !if the user is not found it returns "message": 
  !"Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
+ ! Use .get() when accessing properties in a Map instead of bracket notation.
 */
-//TODO verify email format
+
+/*
+ * Register user endpoint
+ */
 const register = async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -22,6 +28,10 @@ const register = async (req, res) => {
     }
 };
 
+/*
+ * Login user endpoint
+ */
+//! Let's get the valid ingredients upon login, for testing purposes or not
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -33,8 +43,11 @@ const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' }); // should change to 'Invalid email or password' when deployed
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-        res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+        await fetchValidIngredients(user._id);
+        const ingr_to_send = getIncludedIngredients();
+        res.json({ token, user: { id: user._id, name: user.name, email: user.email }, to_send: Object.fromEntries(ingr_to_send )});
+        //const valid_ingredients = getIncludedIngredients();
+        
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

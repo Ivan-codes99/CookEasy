@@ -9,7 +9,6 @@ const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const ingredientRoutes = require("./routes/ingredientRoutes");
 const batchRoutes = require("./routes/batchRoutes");
-
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -26,6 +25,7 @@ app.use('/recipe', recipeRoutes);
 app.use('/auth', authRoutes);
 app.use('/ingredient', ingredientRoutes);
 app.use('/category', categoryRoutes);
+app.use('/batch', batchRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');

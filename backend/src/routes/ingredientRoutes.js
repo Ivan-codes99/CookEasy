@@ -1,14 +1,14 @@
 const express = require('express');
-const { addIngredient, deleteIngredient } = require('../controllers/ingredientController');
+const { addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients } = require('../controllers/kitchenStock/ingredientController');
 
 const router = express.Router();
 /*
-  TODO Add ingredient, category should always be specified, Uncategorized is a category
-  TODO delete ingredient
-  
+
 */
 
 router.post('/add', addIngredient);
 router.delete('/delete', deleteIngredient);
+router.patch('/exclusion', toggleIngredientExcluded);
+router.get('/validIngredients', getValidIngredients);
 
 module.exports = router;
