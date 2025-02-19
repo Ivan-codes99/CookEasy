@@ -1,5 +1,6 @@
 const User = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
+const {getValidIngredients} = require('./kitchenStock/ingredientController.js');
 
 /* 
  !if the user is not found it returns "message": 
@@ -43,6 +44,7 @@ const login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
         res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+        valid_ingredients = await getValidIngredients();
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

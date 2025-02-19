@@ -1,4 +1,5 @@
-const User = require('../models/userModel')
+const User = require('../../models/userModel')
+const {setIncludedIngredients, getIncludedIngredients} = require('../OpenAI/includedIngredientsController');
 
 /*
   TODO 
@@ -84,35 +85,46 @@ const toggleIngredientExcluded = async (req, res) => { //we just need _id, categ
   }
 }
 
+/*
+  *fetchValidIngredients endpoint
+  */
+const fetchValidIngredients = async (_id) => {
+  try {
+      const valid_ingredients = new Map();
+      const user = await User.findById(_id);
+      if (!user) throw new Error("User not found"); //checking user exists
+
+      for (let [categoryName, categoryData] of user.kitchenStock.entries()) {
+          if (!categoryData.exclude) {
+              for (let [ingredientName, ingredientData] of categoryData.ingredients.entries()) {
+                  if (!ingredientData.exclude) {
+                      valid_ingredients.set(ingredientName, ingredientData);
+                  }
+              }
+          }
+      }
+
+      setValidIngredients(valid_ingredients);
+      return Object.fromEntries(valid_ingredients);
+  } catch (error) {
+      throw new Error(error.message);
+  }
+}; 
   /*
   *getValidIngredients endpoint
   */
-  const getValidIngredients = async (req, res) => {
-    const {_id } = req.query;
-    
-    try {
-      const valid_ingredients = new Map();
-      const user = await User.findById(_id);
-      if (!user) return res.status(404).json({message: "User not found"}); //checking user exists
+  /*
+ * getValidIngredients endpoint
+ */
+const getValidIngredients = async (req, res) => {
+  const { _id } = req.query;
 
-      for (let [categoryName, categoryData] of user.kitchenStock.entries()) {
-        if (!categoryData.exclude) {
-
-          for(let [ingredientName, ingredientData] of categoryData.ingredients.entries()) {
-            if(!ingredientData.exclude) {
-              valid_ingredients.set(ingredientName, ingredientData);
-            }
-          }
-        }
-      }
-
-      res.status(200).json({message: "Valid ingredients retrieved",
-        valid_ingredients : Object.fromEntries(valid_ingredients)
-      });
-
-    } catch(error) {
-      res.status(500).json({message: error.message});
-    }
+  try {
+      const valid_ingredients = await fetchValidIngredients(_id);
+      res.status(200).json({ message: "Valid ingredients retrieved", valid_ingredients });
+  } catch (error) {
+      res.status(500).json({ message: error.message });
   }
+};
 
 module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients};

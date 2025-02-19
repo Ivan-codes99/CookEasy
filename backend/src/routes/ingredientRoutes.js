@@ -1,5 +1,5 @@
 const express = require('express');
-const { addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients } = require('../controllers/ingredientController');
+const { addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients } = require('../controllers/kitchenStock/ingredientController');
 
 const router = express.Router();
 /*
