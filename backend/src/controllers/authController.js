@@ -44,8 +44,8 @@ const login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
         await fetchValidIngredients(user._id);
-        ingr_to_send = getIncludedIngredients();
-        res.json({ token, user: { id: user._id, name: user.name, email: user.email }, to_send: ingr_to_send });
+        const ingr_to_send = getIncludedIngredients();
+        res.json({ token, user: { id: user._id, name: user.name, email: user.email }, to_send: Object.fromEntries(ingr_to_send )});
         //const valid_ingredients = getIncludedIngredients();
         
     } catch (error) {

@@ -103,7 +103,7 @@ const fetchValidIngredients = async (_id) => {
               }
           }
       }
-
+      console.log(valid_ingredients);
       setIncludedIngredients(valid_ingredients);
       return Object.fromEntries(valid_ingredients);
   } catch (error) {

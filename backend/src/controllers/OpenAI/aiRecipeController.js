@@ -1,7 +1,7 @@
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const responseFormat = require('../../config/OpenAI/responseFormat').default;
-const systemText = require('../../config/OpenAI/systemMessages/base');
-const userMessage = require('../../config/OpenAI/userMessages/base');
+const {responseFormat} = require('../../config/OpenAI/responseFormat');
+const {systemText} = require('../../config/OpenAI/systemMessages/base');
+const {userMessage} = require('../../config/OpenAI/userMessages/base');
 const OpenAI = require("openai");
 
 const openai = new OpenAI({
@@ -15,11 +15,21 @@ const generateRecipe = async (req, res) => {
       messages: [
         {
           role: "system",
-          content: systemText
+          content: [
+            {
+            "text": systemText,
+            "type": "text"
+          }
+        ]
         },
         {
           role: "user",
-          content: userMessage
+          content: [
+            {
+            "text": userMessage,
+            "type": "text"
+          }
+        ]
         }
       ],
       response_format: {
@@ -33,8 +43,12 @@ const generateRecipe = async (req, res) => {
       presence_penalty: 0
     });
 
-    res.status(200).json(response.data);
+    // Extract the message content from the response
+    const messageContent = response.choices[0].message;
+
+    res.status(200).json(messageContent);
   } catch (error) {
+    console.error("Error generating recipe:", error); // Log the error
     res.status(500).json({ message: error.message });
   }
 };

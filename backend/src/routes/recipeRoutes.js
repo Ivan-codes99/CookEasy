@@ -3,7 +3,7 @@ const { getRecipeRecommendation, saveRecipe, removeRecipe, getSavedRecipe, getAl
 const { generateRecipe } = require('../controllers/OpenAI/aiRecipeController');
 
 const router = express.Router();
-router.post('/generate-recipe', generateRecipe);
+router.get('/generate-recipe', generateRecipe);
 router.get('/recommend', getRecipeRecommendation);
 router.post('/save', saveRecipe);
 router.delete('/remove', removeRecipe);
