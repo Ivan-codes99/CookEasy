@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
                     Meats: {
                         exclude: false,
                         ingredients: {
-                            Ground_Beef: {
+                            Ground_beef: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Pork_Chop: {
+                            Pork_chop: {
                                 exclude: true,
                                 batches: [
                                     {
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
                     Poultry: {
                         exclude: false,
                         ingredients: {
-                            Boneless_Chicken_Breast: {
+                            Boneless_chicken_breast: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -64,7 +64,7 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Bone_in_Chicken_Breast: {
+                            Bone_in_chicken_breast: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -87,7 +87,7 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Small_Shrimp: {
+                            Small_shrimp: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -98,7 +98,7 @@ const userSchema = new mongoose.Schema({
                             }
                         }
                     },
-                    Plant_Based_Proteins: {
+                    Plant_based_proteins: {
                         exclude: false,
                         ingredients: {
                             Tofu: {
@@ -120,7 +120,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 8,
-                                        unit: "cups"
+                                        unit: "cup"
                                     },
                                     {
                                         quantity: 1,
@@ -128,16 +128,16 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Skim_Milk: {
+                            Skim_milk: {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 4,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             },
-                            Cheddar_Cheese: {
+                            Cheddar_cheese: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -161,10 +161,10 @@ const userSchema = new mongoose.Schema({
                             }
                         }
                     },
-                    Legumes_and_Beans: {
+                    Legumes_and_beans: {
                         exclude: false,
                         ingredients: {
-                            Dry_Black_Beans: {
+                            Dry_black_beans: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -173,16 +173,16 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Cooked_Lentils: {
+                            Cooked_lentils: {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 1,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             },
-                            Canned_Black_Beans: {
+                            Canned_black_beans: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -202,16 +202,15 @@ const userSchema = new mongoose.Schema({
                                     {
                                         quantity: 3,
                                         unit: "count",
-                                        size: "small"
                                     }
                                 ]
                             },
-                            Sliced_Apples: {
+                            Sliced_apples: {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 2,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             },
@@ -221,7 +220,6 @@ const userSchema = new mongoose.Schema({
                                     {
                                         quantity: 5,
                                         unit: "count",
-                                        size: "humongous"
                                     }
                                 ]
                             },
@@ -239,7 +237,7 @@ const userSchema = new mongoose.Schema({
                     Vegetables: {
                         exclude: false,
                         ingredients: {
-                            Baby_Carrots: {
+                            Baby_carrots: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -248,7 +246,7 @@ const userSchema = new mongoose.Schema({
                                     },
                                     {
                                         quantity: 2,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             },
@@ -269,33 +267,42 @@ const userSchema = new mongoose.Schema({
                                         unit: "count"
                                     }
                                 ]
+                            },
+                            Garlic_cloves: {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 5,
+                                        unit: "count"
+                                    }
+                                ]
                             }
                         }
                     },
                     Oils: {
                         exclude: false,
                         ingredients: {
-                            Olive_Oil: { exclude: false, batches: [] },
-                            Vegetable_Oil: { exclude: false, batches: [] }
+                            Olive_oil: { exclude: false, batches: [] },
+                            Vegetable_oil: { exclude: false, batches: [] }
                         }
                     },
                     Fats: {
                         exclude: false,
                         ingredients: {
-                            Beef_Tallow: { exclude: false, batches: [] }
+                            Beef_tallow: { exclude: false, batches: [] }
                         }
                     },
-                    Spices_and_Seasonings: {
+                    Spices_and_seasonings: {
                         exclude: false,
                         ingredients: {
-                            table_salt: { exclude: false, batches: [] },
-                            black_pepper: { exclude: false, batches: [] }
+                            Table_salt: { exclude: false, batches: [] },
+                            Black_pepper: { exclude: false, batches: [] }
                         }
                     },
                     Grains: {
                         exclude: false,
                         ingredients: {
-                            Dry_Quinoa: {
+                            Dry_quinoa: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -304,12 +311,12 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Cooked_Quinoa: {
+                            Cooked_quinoa: {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 0.5,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             }
@@ -327,7 +334,7 @@ const userSchema = new mongoose.Schema({
                                     }
                                 ]
                             },
-                            Baking_Soda: {
+                            Baking_soda: {
                                 exclude: false,
                                 batches: [
                                     {
@@ -343,29 +350,29 @@ const userSchema = new mongoose.Schema({
                         ingredients: {
                             Sugar: { exclude: false, batches: [] },
                             Honey: { exclude: false, batches: [] },
-                            Brown_Sugar: { exclude: false, batches: [] }
+                            Brown_sugar: { exclude: false, batches: [] }
                         }
                     },
                     Beverages: {
                         exclude: false,
                         ingredients: {
-                            White_Wine: { exclude: false, batches: [] },
+                            White_wine: { exclude: false, batches: [] },
                             Vinegar: { exclude: false, batches: [] },
-                            Beef_Broth: {
+                            Beef_broth: {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 2,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             },
-                            Chicken_Stock: {
+                            Chicken_stock: {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 3,
-                                        unit: "cups"
+                                        unit: "cup"
                                     }
                                 ]
                             }
@@ -374,7 +381,7 @@ const userSchema = new mongoose.Schema({
                     Miscellaneous: {
                         exclude: true,
                         ingredients: {
-                            Cocoa_Powder: { exclude: false, batches: [] },
+                            Cocoa_powder: { exclude: false, batches: [] },
                             Yeast: { exclude: false, batches: [] }
                         }
                     },
