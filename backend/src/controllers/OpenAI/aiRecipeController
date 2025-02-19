@@ -1,0 +1,44 @@
+// var https = require('follow-redirects').https;
+// var fs = require('fs');
+// const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// const responseFormat = require('../../config/OpenAI/responseFormat.json');
+// import OpenAI from "openai";
+
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
+
+// const response = await openai.chat.completions.create({
+//   model: "gpt-4o",
+//   messages: [
+//     {
+//       "role": "system",
+//       "content": [
+//         {
+//           "text": "You are a strict AI chef that generates structured recipe responses based on available ingredients.\n\n- Assume the user has basic kitchen ingredients.\n- Consider the user’s meal focus.\n- You do NOT have to use all provided ingredients or amounts.\n- Ensure the recipe instructions guide the user on necessary ingredient preparation (e.g., dicing an onion if needed).\n- Format the instructions as a numbered list, starting each step with \"Step 1:\", \"Step 2:\", etc.",
+//           "type": "text"
+//         }
+//       ]
+//     },
+//     {
+//       "role": "user",
+//       "content": [
+//         {
+//           "type": "text",
+//           "text": "Here are the ingredients I have:\n- Ground Beef\n- 1 lb Chicken Breast\n- Large Tortillas\n- Cooked White Rice\n- 2 Cups Shredded Cheddar Cheese\n- Mozzarella Cheese\n- Black Beans\n- 1 cup Diced Tomatoes\n- Spinach\n- 1 Cup Chopped Bell Peppers\n- Onion\n- Garlic\n- 4 Eggs\n- Oats\n- Almond Milk\n- Bananas\n- Strawberries\n- Peanut Butter\n- Greek Yogurt\n- Honey\n\nMeal Focus: Fast, Breakfast\nServings: 2"
+//         }
+//       ]
+//     }
+//   ],
+
+//   response_format: {
+//     "type": "json_schema",
+//     "json_schema": responseFormat
+//   },
+  
+//   temperature: 0.35,
+//   max_completion_tokens: 10000,
+//   top_p: 0,
+//   frequency_penalty: 0,
+//   presence_penalty: 0
+// });

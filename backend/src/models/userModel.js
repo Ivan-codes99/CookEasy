@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const recipeSchema = require('./recipeSchema');
 const categorySchema = require("./categorySchema");
 
+//? SHould we use MAP types or OBJECT types?
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 3,
-                                        unit: "lbs"
+                                        unit: "lbs" // 3 lbs of Ground Beef
                                     }
                                 ]
                             },
@@ -41,7 +42,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 2,
-                                        unit: "lbs"
+                                        unit: "lbs" // 2 lbs of Pork Chop
                                     }
                                 ]
                             }
@@ -55,11 +56,11 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 5,
-                                        unit: "count"
+                                        unit: "count" // 5 of Boneless Chicken Breast
                                     },
                                     {
                                         quantity: 3,
-                                        unit: "lbs"
+                                        unit: "lbs"// 3 lbs of Boneless Chicken Breast
                                     }
                                 ]
                             },
@@ -68,7 +69,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 2,
-                                        unit: "lbs"
+                                        unit: "lbs" // 2 lbs of Bone In Chicken Breast
                                     }
                                 ]
                             }
@@ -91,7 +92,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 12,
-                                        unit: "oz"
+                                        unit: "oz" // 12 oz of Small Shrimp
                                     }
                                 ]
                             }
@@ -105,7 +106,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 16,
-                                        unit: "oz"
+                                        unit: "oz" // 16 oz of Tofu
                                     }
                                 ]
                             }
@@ -150,7 +151,7 @@ const userSchema = new mongoose.Schema({
                                 batches: [
                                     {
                                         quantity: 8,
-                                        unit: "tbsp"
+                                        unit: "tbsp" //8 tbsp of Butter
                                     },
                                     {
                                         quantity: 4,

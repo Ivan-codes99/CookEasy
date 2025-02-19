@@ -29,6 +29,7 @@ const register = async (req, res) => {
 /*
  * Login user endpoint
  */
+//! Let's get the valid ingredients upon login, for testing purposes or not
 const login = async (req, res) => {
     const { email, password } = req.body;
 
