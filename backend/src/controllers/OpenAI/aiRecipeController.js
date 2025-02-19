@@ -1,6 +1,6 @@
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const {responseFormat} = require('../../config/OpenAI/responseFormat');
-const {systemText} = require('../../config/OpenAI/systemMessages/base');
+const {systemMessage} = require('../../config/OpenAI/systemMessages/base');
 const {userMessage} = require('../../config/OpenAI/userMessages/base');
 const OpenAI = require("openai");
 
@@ -10,6 +10,10 @@ const openai = new OpenAI({
 
 const generateRecipe = async (req, res) => {
   try {
+    const userMessageContent = userMessage();
+    const systemMessageContent = systemMessage();
+    console.log(`User message:\n ${userMessageContent}`);
+    console.log(`System message:\n ${systemMessageContent}`);
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -17,7 +21,7 @@ const generateRecipe = async (req, res) => {
           role: "system",
           content: [
             {
-            "text": systemText,
+            "text": systemMessageContent,
             "type": "text"
           }
         ]
@@ -26,7 +30,7 @@ const generateRecipe = async (req, res) => {
           role: "user",
           content: [
             {
-            "text": userMessage,
+            "text": userMessageContent,
             "type": "text"
           }
         ]
@@ -43,6 +47,8 @@ const generateRecipe = async (req, res) => {
       presence_penalty: 0
     });
 
+    console.log("OpenAI response:", response); // Log the entire response
+
     // Extract the message content from the response
     const messageContent = response.choices[0].message;
 
@@ -53,4 +59,4 @@ const generateRecipe = async (req, res) => {
   }
 };
 
-module.exports = {generateRecipe};
+module.exports = { generateRecipe };

@@ -1,13 +1,18 @@
 const {getIncludedIngredients} = require('../../../controllers/OpenAI/includedIngredientsController.js');
+//!hardcoding these 2 variables here for now lol
+const meal_focus = "Protein-heavy";
+const servings = "2";
 
 const userMessage = () => {
-    ingredients = getIncludedIngredients();
+    const ingredients = getIncludedIngredients();
+    console.log("Getting user message");
 
-    const message = "Here are the ingredients I have:";
+    let message = "Here are the ingredients I have:";
     for (const[ingredientName, ingredientData] of ingredients.entries()) {
-        stringified = stringifyIngredient(ingredientName.toString(), ingredientData);
+        let stringified = stringifyIngredient(ingredientName.toString(), ingredientData);
         message += "\n"+ "- " + stringified;
     }
+    message += "\n\nMeal Focus: " + meal_focus + "\n" + "Servings: " + servings;
     return message;
 }
 
@@ -26,5 +31,5 @@ const stringifyIngredient = (name, data) => {
         }
     }
 }
-message = userMessage();
-module.exports = {message};
+
+module.exports = {userMessage};
