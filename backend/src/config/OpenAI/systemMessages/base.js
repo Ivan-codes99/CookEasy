@@ -5,4 +5,4 @@ const system_text = "You are a strict AI chef that generates structured recipe r
                 - Ensure the recipe instructions guide the user on necessary ingredient preparation (e.g., dicing an onion if needed).\n\
                 - Format the instructions as a numbered list, starting each step with \"Step 1:\", \"Step 2:\", etc."
 
-export {system_text};
+module.exports = {system_text};

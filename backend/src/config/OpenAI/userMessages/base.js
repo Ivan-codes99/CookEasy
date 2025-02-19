@@ -27,4 +27,4 @@ const stringifyIngredient = (name, data) => {
     }
 }
 message = userMessage();
-export {message};
+module.exports = {message};
