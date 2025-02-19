@@ -125,4 +125,4 @@ const getValidIngredients = async (req, res) => {
   }
 };
 
-module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients};
+module.exports = {addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients, fetchValidIngredients};
