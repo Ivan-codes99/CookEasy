@@ -1,44 +1,42 @@
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const responseFormat = require('../../config/OpenAI/responseFormat.json');
+const responseFormat = require('../../config/OpenAI/responseFormat').default;
 const systemText = require('../../config/OpenAI/systemMessages/base');
 const userMessage = require('../../config/OpenAI/userMessages/base');
-import OpenAI from "openai";
+const OpenAI = require("openai");
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
 
-const response = await openai.chat.completions.create({
-  model: "gpt-4o",
-  messages: [
-    {
-      "role": "system",
-      "content": [
+const generateRecipe = async (req, res) => {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
         {
-          "text": systemText,
-          "type": "text"
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "content": [
+          role: "system",
+          content: systemText
+        },
         {
-          "type": "text",
-          "text": userMessage
+          role: "user",
+          content: userMessage
         }
-      ]
-    }
-  ],
+      ],
+      response_format: {
+        type: "json_schema",
+        json_schema: responseFormat
+      },
+      temperature: 0.35,
+      max_completion_tokens: 10000,
+      top_p: 0,
+      frequency_penalty: 0,
+      presence_penalty: 0
+    });
 
-  response_format: {
-    "type": "json_schema",
-    "json_schema": responseFormat
-  },
-  
-  temperature: 0.35,
-  max_completion_tokens: 10000,
-  top_p: 0,
-  frequency_penalty: 0,
-  presence_penalty: 0
-});
+    res.status(200).json(response.data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {generateRecipe};

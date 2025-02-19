@@ -1,4 +1,4 @@
-{
+const responseFormat = {
     "name": "recipe",
     "strict": true,
     "schema": {
@@ -80,3 +80,4 @@
       "additionalProperties": false
     }
   }
+export default responseFormat;
