@@ -8,4 +8,5 @@ const getIncludedIngredients = () => {
     return included_ingredients;
 }
 
+
 module.exports = {setIncludedIngredients, getIncludedIngredients};

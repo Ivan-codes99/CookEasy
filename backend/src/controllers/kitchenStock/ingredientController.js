@@ -104,7 +104,7 @@ const fetchValidIngredients = async (_id) => {
           }
       }
 
-      setValidIngredients(valid_ingredients);
+      setIncludedIngredients(valid_ingredients);
       return Object.fromEntries(valid_ingredients);
   } catch (error) {
       throw new Error(error.message);
@@ -113,9 +113,7 @@ const fetchValidIngredients = async (_id) => {
   /*
   *getValidIngredients endpoint
   */
-  /*
- * getValidIngredients endpoint
- */
+  
 const getValidIngredients = async (req, res) => {
   const { _id } = req.query;
 

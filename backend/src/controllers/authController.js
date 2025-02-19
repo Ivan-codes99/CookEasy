@@ -1,6 +1,7 @@
 const User = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
-const {getValidIngredients} = require('./kitchenStock/ingredientController.js');
+const {fetchValidIngredients} = require('./kitchenStock/ingredientController.js');
+const {getIncludedIngredients} = require('./OpenAI/includedIngredientsController.js');
 
 /* 
  !if the user is not found it returns "message": 
@@ -42,9 +43,11 @@ const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' }); // should change to 'Invalid email or password' when deployed
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        await fetchValidIngredients(user._id);
 
         res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
-        valid_ingredients = await getValidIngredients();
+        const valid_ingredients = getIncludedIngredients();
+        
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
