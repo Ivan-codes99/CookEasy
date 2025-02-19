@@ -107,7 +107,7 @@ const toggleIngredientExcluded = async (req, res) => { //we just need _id, categ
       }
 
       res.status(200).json({message: "Valid ingredients retrieved",
-        valid_ingredients : valid_ingredients
+        valid_ingredients : Object.fromEntries(valid_ingredients)
       });
 
     } catch(error) {
