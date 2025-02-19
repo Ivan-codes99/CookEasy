@@ -80,4 +80,4 @@ const responseFormat = {
       "additionalProperties": false
     }
   }
-export default responseFormat;
+module.exports = {responseFormat};
