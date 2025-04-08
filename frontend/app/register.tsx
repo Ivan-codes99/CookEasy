@@ -17,7 +17,7 @@ export default function RegisterScreen() {
       setMessage("✔ Registered successfully!"); // or trigger API call here
     }
   };
-
+  //TODO text field validations, for name, password, email
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>
@@ -48,6 +48,9 @@ export default function RegisterScreen() {
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>register</Text>
       </TouchableOpacity>
+
+       {/* Error message displayed at the bottom */}
+       {message && <Text style={styles.errorText}>{message}</Text>}
     </View>
   );
 }
@@ -78,5 +81,11 @@ const styles = StyleSheet.create({
     color: "red",
     marginBottom: 10,
     alignSelf: "flex-start"
+  },
+  errorText: {
+    fontSize: 14,
+    color: "red",
+    marginTop: 20,
+    textAlign: "center"
   }
 });
