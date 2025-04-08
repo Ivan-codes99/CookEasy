@@ -1,23 +1,36 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-
+import {register} from "../src/api/auth";
 export default function RegisterScreen() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
+//TODO text field validations, for name, password, email
+const handleRegister = async () => {
+  console.log("Register button clicked")
+  // Basic client-side validation
+  if (!email.includes("@")) {
+    setMessage("Invalid email format");
+    return;
+  } else if (password.trim() === "") {
+    setMessage("Password cannot be empty");
+    return;
+  } else if (name.trim() === "") {
+    setMessage("Name cannot be empty");
+    return;
+  }
 
-  const handleRegister = () => {
-    // Placeholder validation (replace with real logic later)
-    if (!email.includes("@")) {
-      setMessage("Invalid email address");
-    } else if (password.length < 6) {
-      setMessage("Password must be at least 6 characters");
-    } else {
-      setMessage("✔ Registered successfully!"); // or trigger API call here
-    }
-  };
-  //TODO text field validations, for name, password, email
+  try {
+    // Call the register function and handle the response
+    const response = await register(name, email, password);
+    setMessage("✔ Registered successfully!"); // Success message
+  } catch (error: any) {
+    setMessage(error.message); // Display error message from the API
+  }
+};
+
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>

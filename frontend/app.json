@@ -8,6 +8,9 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "extra": {
+      "BACKEND_BASE_URL": "https://cookeasy-backend.onrender.com"
+    },
     "ios": {
       "supportsTablet": true
     },
