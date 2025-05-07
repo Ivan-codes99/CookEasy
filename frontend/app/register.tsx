@@ -48,44 +48,36 @@ export default function RegisterScreen() {
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>register</Text>
       </TouchableOpacity>
-
-       {/* Error message displayed at the bottom */}
-       {message && <Text style={styles.errorText}>{message}</Text>}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff", paddingHorizontal: 20 },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  container: { flex: 1, alignItems: "center", backgroundColor: "#fff", paddingHorizontal: 50, paddingVertical: 50 },
+  title: { fontSize: 36, fontWeight: "bold", marginBottom: 20, color: "lightcoral" },
   avatarPlaceholder: { width: 80, height: 80, borderRadius: 40, backgroundColor: "#ccc", marginBottom: 20 },
   input: {
-    backgroundColor: "#ddd",
-    padding: 10,
-    marginVertical: 8,
-    borderRadius: 10,
+    backgroundColor: "#FFDAB9",
+    padding: 20,
+    marginVertical: 10,
+    borderRadius: 15,
     width: "100%",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 24
   },
   button: {
-    backgroundColor: "#ddd",
+    backgroundColor: "lightcoral",
     padding: 10,
     borderRadius: 10,
+    width: "100%",
     marginTop: 10,
-    alignSelf: "flex-end",
     paddingHorizontal: 20
   },
-  buttonText: { fontSize: 14 },
+  buttonText: { fontSize: 24, color: "white", textAlign: "center"},
   message: {
     fontSize: 14,
     color: "red",
     marginBottom: 10,
     alignSelf: "flex-start"
   },
-  errorText: {
-    fontSize: 14,
-    color: "red",
-    marginTop: 20,
-    textAlign: "center"
-  }
 });
