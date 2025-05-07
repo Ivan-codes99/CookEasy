@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-
+import logo from "../../assets/images/logo.jpg"; // Ensure this file exists
 export default function AuthScreen() {
   const router = useRouter();
 
@@ -8,6 +8,7 @@ export default function AuthScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>
       <View style={styles.avatarPlaceholder} />
+      <Image source={logo} style={{ width: 80, height: 80, borderRadius: 40 }} />
       <TouchableOpacity style={styles.button} onPress={() => router.push("/login")}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
