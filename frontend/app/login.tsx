@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
 export default function RegisterScreen() {
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
 
   const handleLogin = () => {
-    // Placeholder validation (replace with real logic later)
+    // TODO Connect to API for credentials validation
     if (!email.includes("@")) {
       setMessage("Invalid email address");
     } else if (password.length < 6) {
@@ -17,7 +16,6 @@ export default function RegisterScreen() {
       setMessage("✔ Registered successfully!"); // or trigger API call here
     }
   };
-  //TODO text field validations, for name, password, email
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>
@@ -39,7 +37,7 @@ export default function RegisterScreen() {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
     </View>
   );

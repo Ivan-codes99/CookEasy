@@ -19,9 +19,16 @@ export default function AuthScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff", padding: 50 },
+  title: { fontSize: 36, fontWeight: "bold", marginBottom: 20, color: "lightcoral" },
   avatarPlaceholder: { width: 80, height: 80, borderRadius: 40, backgroundColor: "#ccc", marginBottom: 20 },
-  button: { backgroundColor: "#ddd", padding: 10, borderRadius: 5, marginVertical: 5, width: 150, alignItems: "center" },
-  buttonText: { fontSize: 16 }
+  button: {
+    backgroundColor: "lightcoral",
+    padding: 10,
+    borderRadius: 10,
+    width: "100%",
+    marginTop: 10,
+    paddingHorizontal: 20
+  },
+  buttonText: { fontSize: 24, color: "white", textAlign: "center"}
 });
