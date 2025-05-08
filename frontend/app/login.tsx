@@ -1,35 +1,29 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {login} from "../src/api/auth";
 
-export default function RegisterScreen() {
-  const [name, setName] = useState("");
+export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
 
-  const handleLogin = () => {
-    // Placeholder validation (replace with real logic later)
-    if (!email.includes("@")) {
-      setMessage("Invalid email address");
-    } else if (password.length < 6) {
-      setMessage("Password must be at least 6 characters");
-    } else {
-      setMessage("✔ Registered successfully!"); // or trigger API call here
+  const handleLogin = async () => {
+    try {
+      setMessage("logging in...");
+      const res = await login(email, password);
+      setMessage("user logged in");
+      console.log("User logged in", res);
+    }
+    catch (err: any) {
+      setMessage(err.message);
     }
   };
-  //TODO text field validations, for name, password, email
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>
-      <View style={styles.avatarPlaceholder} />
+      <Image source={require("../assets/images/logo.jpg")} style={{ width: 150, height: 150, borderRadius: 100 }} />
       <Text style={styles.message}>{message}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -37,9 +31,16 @@ export default function RegisterScreen() {
         onChangeText={setEmail}
         keyboardType="email-address"
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -48,7 +49,6 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", backgroundColor: "#fff", paddingHorizontal: 50, paddingVertical: 50 },
   title: { fontSize: 36, fontWeight: "bold", marginBottom: 20, color: "lightcoral" },
-  avatarPlaceholder: { width: 80, height: 80, borderRadius: 40, backgroundColor: "#ccc", marginBottom: 20 },
   input: {
     backgroundColor: "#FFDAB9",
     padding: 20,

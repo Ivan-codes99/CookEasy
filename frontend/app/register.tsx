@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { register } from "../src/api/auth";
 
 export default function RegisterScreen() {
   const [name, setName] = useState("");
@@ -7,21 +8,36 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
 
-  const handleRegister = () => {
-    // Placeholder validation (replace with real logic later)
+  const handleRegister = async () => {
+    setMessage(""); // Clear old messages
+    // Basic validation
     if (!email.includes("@")) {
-      setMessage("Invalid email address");
-    } else if (password.length < 6) {
+      setMessage("Invalid email");
+      return;
+    }
+    if (password.length < 6) {
       setMessage("Password must be at least 6 characters");
-    } else {
-      setMessage("✔ Registered successfully!"); // or trigger API call here
+      return;
+    }
+
+    try {
+      setMessage("Registering.....");
+      const res = await register(name, email, password);
+      setMessage("✔ Registered successfully!");
+      console.log("User registered:", res);
+
+      // Optionally redirect to login screen:
+      // router.push("/login");
+    } catch (err: any) {
+      setMessage(err.message);
     }
   };
+
   //TODO text field validations, for name, password, email
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>
-      <View style={styles.avatarPlaceholder} />
+      <Image source={require("../assets/images/logo.jpg")} style={{ width: 150, height: 150, borderRadius: 100 }} />
       <Text style={styles.message}>{message}</Text>
 
       <TextInput
@@ -46,16 +62,15 @@ export default function RegisterScreen() {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>register</Text>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", backgroundColor: "#fff", paddingHorizontal: 50, paddingVertical: 50 },
+  container: { flex: 1, alignItems: "center", backgroundColor: "#fff", padding: 50 },
   title: { fontSize: 36, fontWeight: "bold", marginBottom: 20, color: "lightcoral" },
-  avatarPlaceholder: { width: 80, height: 80, borderRadius: 40, backgroundColor: "#ccc", marginBottom: 20 },
   input: {
     backgroundColor: "#FFDAB9",
     padding: 20,
@@ -70,7 +85,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: "100%",
-    marginTop: 10,
+    marginTop: 20,
     paddingHorizontal: 20
   },
   buttonText: { fontSize: 24, color: "white", textAlign: "center"},
