@@ -1,11 +1,11 @@
-require('dotenv').config({ path: '../.env' }); //! in an actual build this should be .config()
 import axios from "axios";
+import Constants from 'expo-constants';
 
-const BACKEND_BASE_URL = process.env.EXPO_PUBLIC_BACKEND_BASE_URL;
+const BACKEND_BASE_URL = Constants.expoConfig?.extra?.backendBaseUrl || 'https://default-backend-url.com';
 
 const register = async (name: string, email: string, password: string) => {
     try {
-        const response = await axios.post(`${BACKEND_BASE_URL}/api/register`, {
+        const response = await axios.post(`${BACKEND_BASE_URL}/auth/register`, {
             name,
             email,
             password
@@ -27,11 +27,11 @@ const register = async (name: string, email: string, password: string) => {
 
 const login = async (email: string, password: string) => {
     try {
-        const response = await axios.post(`${BACKEND_BASE_URL}/api/login`, {
+        const response = await axios.post(`${BACKEND_BASE_URL}/auth/login`, {
             email,
             password
         });
-        
+
         return response.data;
     } catch (error: any) {
         if (error.response) {
