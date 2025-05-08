@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {login} from "../src/api/auth";
 
-export default function RegisterScreen() {
+export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
 
-  const handleLogin = () => {
-    // TODO Connect to API for credentials validation
-    if (!email.includes("@")) {
-      setMessage("Invalid email address");
-    } else if (password.length < 6) {
-      setMessage("Password must be at least 6 characters");
-    } else {
-      setMessage("✔ Registered successfully!"); // or trigger API call here
+  const handleLogin = async () => {
+    try {
+      setMessage("logging in...");
+      const res = await login(email, password);
+      setMessage("user logged in");
+      console.log("User logged in", res);
+    }
+    catch (err: any) {
+      setMessage(err.message);
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CookEasy</Text>
@@ -23,17 +26,17 @@ export default function RegisterScreen() {
       <Text style={styles.message}>{message}</Text>
       <TextInput
         style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
       />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>

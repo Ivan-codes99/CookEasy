@@ -21,6 +21,7 @@ export default function RegisterScreen() {
     }
 
     try {
+      setMessage("Registering.....");
       const res = await register(name, email, password);
       setMessage("✔ Registered successfully!");
       console.log("User registered:", res);

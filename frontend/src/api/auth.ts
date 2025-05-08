@@ -34,6 +34,7 @@ const login = async (email: string, password: string) => {
 
         return response.data;
     } catch (error: any) {
+        console.log(error);
         if (error.response) {
             //backend responded with error
             throw new Error(error.response.data.message || "Login failed.");
