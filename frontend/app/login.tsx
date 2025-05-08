@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useRouter } from "expo-router";
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from "react-native";
 import {login} from "../src/api/auth";
 
 export default function LoginScreen() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
@@ -13,6 +15,7 @@ export default function LoginScreen() {
       const res = await login(email, password);
       setMessage("user logged in");
       console.log("User logged in", res);
+      router.push("./home"); // Redirect to home after successful login
     }
     catch (err: any) {
       setMessage(err.message);
