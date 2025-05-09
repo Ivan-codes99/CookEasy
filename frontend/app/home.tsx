@@ -5,8 +5,13 @@ export default function HomeScreen() {
     const router = useRouter();
 
     return (
-        <View>
-            <Text>Hello</Text>
+        <View style = {styles.container}>
+            <Text style = {styles.greeting}>Hello</Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {flex: 1, alignItems: "center", backgroundColor: "white"},
+    greeting: {color: "black"}
+})
