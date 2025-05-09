@@ -1,23 +1,31 @@
 import React, { useState } from "react";
+import { useRouter } from "expo-router";
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet } from "react-native";
 import {login} from "../src/api/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(""); // for validation feedback
 
   const handleLogin = async () => {
-    try {
-      setMessage("logging in...");
-      const res = await login(email, password);
-      setMessage("user logged in");
-      console.log("User logged in", res);
-    }
-    catch (err: any) {
-      setMessage(err.message);
-    }
-  };
+  try {
+    setMessage("logging in...");
+    const res = await login(email, password);
+
+    // Save token and user data locally
+    await AsyncStorage.setItem("token", res.token);
+    await AsyncStorage.setItem("user", JSON.stringify(res.user));
+
+    setMessage("user logged in");
+    console.log("User logged in", res);
+    router.push("./home"); // Redirect to home after successful login
+  } catch (err: any) {
+    setMessage(err.message);
+  }
+};
 
   return (
     <View style={styles.container}>

@@ -47,10 +47,22 @@ const login = async (req, res) => {
         const ingr_to_send = getIncludedIngredients();
         res.json({ token, user: { id: user._id, name: user.name, email: user.email }, to_send: Object.fromEntries(ingr_to_send )});
         //const valid_ingredients = getIncludedIngredients();
-        
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-module.exports = { register, login };
+const getUserData = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password'); // don't return password
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        res.json({ user });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+module.exports = { register, login, getUserData };
