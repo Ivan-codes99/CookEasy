@@ -3,6 +3,10 @@
 // const meal_focus = "Protein-heavy";
 // const servings = "2";
 
+<<<<<<< Updated upstream
+=======
+// //gets the user message
+>>>>>>> Stashed changes
 // const userMessage = () => {
 //     const ingredients = getIncludedIngredients();
 //     console.log("Getting user message");
@@ -16,6 +20,10 @@
 //     return message;
 // }
 
+<<<<<<< Updated upstream
+=======
+// //gets the first batch of an ingredient, if there is one
+>>>>>>> Stashed changes
 // const stringifyIngredient = (name, data) => {
 //     if (data.batches.length < 1) {
 //         return name;
