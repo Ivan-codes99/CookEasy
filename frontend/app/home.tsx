@@ -24,6 +24,24 @@ interface User {
   };
 }
 
+const formatDate = (date: Date) => {
+  const now = new Date();
+  const expDate = new Date(date);
+  const diffTime = expDate.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const formattedDate = expDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  if (diffDays < 0) {
+    return { text: `Expired (${formattedDate})`, color: '#FF4444' };
+  } else if (diffDays === 0) {
+    return { text: `Expires today (${formattedDate})`, color: '#FFA500' };
+  } else if (diffDays <= 3) {
+    return { text: `Expires in ${diffDays} days (${formattedDate})`, color: '#FFA500' };
+  } else {
+    return { text: `Expires ${formattedDate}`, color: '#666666' };
+  }
+};
+
 export default function HomeScreen() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
@@ -70,13 +88,22 @@ export default function HomeScreen() {
     quantity: number;
     unit: string;
     expirationDate?: Date;
-  }) => (
-    <View style={styles.batchItem}>
-      <Text style={styles.batchText}>
-        {batch.quantity} {batch.unit}{batch.expirationDate ? `, ${batch.expirationDate}` : ''}
-      </Text>
-    </View>
-  );
+  }) => {
+    const dateInfo = batch.expirationDate ? formatDate(batch.expirationDate) : null;
+    
+    return (
+      <View style={styles.batchItem}>
+        <Text style={styles.batchText}>
+          {batch.quantity} {batch.unit}
+        </Text>
+        {dateInfo && (
+          <Text style={[styles.expirationText, { color: dateInfo.color }]}>
+            {dateInfo.text}
+          </Text>
+        )}
+      </View>
+    );
+  };
 
   const renderIngredient = (name: string, ingredient: {
     exclude: boolean;
@@ -93,10 +120,8 @@ export default function HomeScreen() {
       </View>
       <View style={styles.batchList}>
         {ingredient.batches.map((batch, index) => (
-          <View key={index} style={styles.batchItem}>
-            <Text style={styles.batchText}>
-              {batch.quantity} {batch.unit}{batch.expirationDate ? `, ${batch.expirationDate}` : ''}
-            </Text>
+          <View key={index}>
+            {renderBatch(batch)}
           </View>
         ))}
       </View>
@@ -258,11 +283,18 @@ const styles = StyleSheet.create({
     marginLeft: 34
   },
   batchItem: {
-    marginBottom: 2
+    marginBottom: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8
   },
   batchText: {
     fontSize: 14,
     color: "#666666"
+  },
+  expirationText: {
+    fontSize: 12,
+    fontStyle: 'italic'
   },
   checkbox: {
     width: 20,
