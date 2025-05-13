@@ -3,6 +3,7 @@ const {getIncludedIngredients} = require('../../../controllers/OpenAI/includedIn
 const meal_focus = "Protein-heavy";
 const servings = "2";
 
+//gets the user message
 const userMessage = () => {
     const ingredients = getIncludedIngredients();
     console.log("Getting user message");
@@ -16,6 +17,7 @@ const userMessage = () => {
     return message;
 }
 
+//gets the first batch of an ingredient, if there is one
 const stringifyIngredient = (name, data) => {
     if (data.batches.length < 1) {
         return name;

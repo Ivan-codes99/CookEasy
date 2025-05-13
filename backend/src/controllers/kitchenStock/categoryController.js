@@ -3,13 +3,7 @@ const User = require('../../models/userModel');
  !if the user is not found it returns "message": 
  !"Cast to ObjectId failed for value \"67af9c95652b7c25f1cb7e8eeee\" (type string) at path \"_id\" for model \"users\""
 */
-/*
-  TODO //?changeCategoryName
-  TODO toggleCategoryExcluded
-  TODO Add ingredient, category should always be specified, Uncategorized is a category 
-  TODO Implement batch merging logic
-       ?Should user be able to have the same ingredient in different categories?
-*/
+
   
 /*
  * Add category endpoint
