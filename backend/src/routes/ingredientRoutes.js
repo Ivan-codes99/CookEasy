@@ -1,5 +1,5 @@
 const express = require('express');
-const { addIngredient, deleteIngredient, toggleIngredientExcluded, getValidIngredients } = require('../controllers/kitchenStock/ingredientController');
+const { addIngredient, deleteIngredient, toggleIngredientExcluded } = require('../controllers/kitchenStock/ingredientController');
 
 const router = express.Router();
 /*
@@ -9,6 +9,5 @@ const router = express.Router();
 router.post('/add', addIngredient);
 router.delete('/delete', deleteIngredient);
 router.patch('/exclusion', toggleIngredientExcluded);
-router.get('/validIngredients', getValidIngredients);
 
 module.exports = router;
