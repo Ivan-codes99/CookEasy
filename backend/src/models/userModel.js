@@ -24,43 +24,196 @@ const userSchema = new mongoose.Schema({
             type: Map,
             of: categorySchema,
             default: () => { 
+                const today = new Date();
+                const addDays = (days) => {
+                    const date = new Date(today);
+                    date.setDate(date.getDate() + days);
+                    return date;
+                };
+                const addMonths = (months) => {
+                    const date = new Date(today);
+                    date.setMonth(date.getMonth() + months);
+                    return date;
+                };
+                const addYears = (years) => {
+                    const date = new Date(today);
+                    date.setFullYear(date.getFullYear() + years);
+                    return date;
+                };
+
                 return {
-                    Meats: {
+                    "Meats": {
                         exclude: false,
                         ingredients: {
-                            Ground_beef: {
+                            "Ground beef": {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 1,
-                                        unit: "lbs"
+                                        unit: "lbs",
+                                        expirationDate: addDays(7)
+                                    }
+                                ]
+                            },
+                            "Chicken breast": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 2,
+                                        unit: "lbs",
+                                        expirationDate: addDays(5)
+                                    }
+                                ]
+                            },
+                            "Pork chops": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 4,
+                                        unit: "count",
+                                        expirationDate: addDays(6)
                                     }
                                 ]
                             }
                         }
                     },
-                    Vegetables: {
+                    "Vegetables": {
                         exclude: false,
                         ingredients: {
-                            Garlic_cloves: {
+                            "Garlic cloves": {
                                 exclude: false,
                                 batches: [
                                     {
                                         quantity: 5,
-                                        unit: "count"
+                                        unit: "cloves",
+                                        expirationDate: addMonths(1)
+                                    }
+                                ]
+                            },
+                            "Onions": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 3,
+                                        unit: "count",
+                                        expirationDate: addDays(19)
+                                    }
+                                ]
+                            },
+                            "Carrots": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 1,
+                                        unit: "bunch",
+                                        expirationDate: addDays(14)
+                                    }
+                                ]
+                            },
+                            "Potatoes": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 5,
+                                        unit: "count",
+                                        expirationDate: addDays(28)
                                     }
                                 ]
                             }
                         }
                     },
-                    Spices_and_seasonings: {
+                    "Dairy": {
                         exclude: false,
                         ingredients: {
-                            Table_salt: { exclude: false, batches: [] },
-                            Black_pepper: { exclude: false, batches: [] }
+                            "Milk": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 1,
+                                        unit: "gallon",
+                                        expirationDate: addDays(14)
+                                    }
+                                ]
+                            },
+                            "Butter": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 2,
+                                        unit: "sticks",
+                                        expirationDate: addMonths(1)
+                                    }
+                                ]
+                            },
+                            "Cheese": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 1,
+                                        unit: "pack",
+                                        expirationDate: addDays(19)
+                                    }
+                                ]
+                            }
                         }
                     },
-                    Uncategorized: {
+                    "Spices and Seasonings": {
+                        exclude: false,
+                        ingredients: {
+                            "Table salt": { 
+                                exclude: false, 
+                                batches: [] 
+                            },
+                            "Black pepper": { 
+                                exclude: false, 
+                                batches: [] 
+                            },
+                            "Cumin": { 
+                                exclude: false, 
+                                batches: [] 
+                            },
+                            "Paprika": { 
+                                exclude: false, 
+                                batches: [] 
+                            }
+                        }
+                    },
+                    "Pantry": {
+                        exclude: false,
+                        ingredients: {
+                            "Rice": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 5,
+                                        unit: "lbs",
+                                        expirationDate: addYears(1)
+                                    }
+                                ]
+                            },
+                            "Pasta": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 3,
+                                        unit: "pack",
+                                        expirationDate: addYears(1)
+                                    }
+                                ]
+                            },
+                            "Olive oil": {
+                                exclude: false,
+                                batches: [
+                                    {
+                                        quantity: 16,
+                                        unit: "fl oz",
+                                        expirationDate: addYears(1)
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "Uncategorized": {
                         exclude: true,
                         ingredients: {}
                     }
