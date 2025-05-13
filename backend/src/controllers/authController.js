@@ -1,7 +1,6 @@
 const User = require('../models/userModel.js');
 const jwt = require('jsonwebtoken');
-const {fetchValidIngredients} = require('./kitchenStock/ingredientController.js');
-const {getIncludedIngredients} = require('./OpenAI/includedIngredientsController.js');
+
 
 /* 
  !if the user is not found it returns "message": 
@@ -31,7 +30,6 @@ const register = async (req, res) => {
 /*
  * Login user endpoint
  */
-//! Let's get the valid ingredients upon login, for testing purposes or not
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -43,9 +41,7 @@ const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' }); // should change to 'Invalid email or password' when deployed
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-        await fetchValidIngredients(user._id);
-        const ingr_to_send = getIncludedIngredients();
-        res.json({ token, user: { id: user._id, name: user.name, email: user.email }, to_send: Object.fromEntries(ingr_to_send )});
+        res.json({ token, user: { id: user._id, name: user.name, email: user.email}});
         //const valid_ingredients = getIncludedIngredients();
 
     } catch (error) {
