@@ -52,6 +52,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 1,
                                         unit: "lbs",
                                         expirationDate: addDays(7)
+                                    },
+                                    {
+                                        quantity: 2,
+                                        unit: "lbs",
+                                        expirationDate: addDays(5)
                                     }
                                 ]
                             },
@@ -62,6 +67,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 2,
                                         unit: "lbs",
                                         expirationDate: addDays(5)
+                                    },
+                                    {
+                                        quantity: 1,
+                                        unit: "lbs",
+                                        expirationDate: addDays(3)
                                     }
                                 ]
                             },
@@ -87,6 +97,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 5,
                                         unit: "cloves",
                                         expirationDate: addMonths(1)
+                                    },
+                                    {
+                                        quantity: 3,
+                                        unit: "cloves",
+                                        expirationDate: addDays(20)
                                     }
                                 ]
                             },
@@ -97,6 +112,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 3,
                                         unit: "count",
                                         expirationDate: addDays(19)
+                                    },
+                                    {
+                                        quantity: 2,
+                                        unit: "count",
+                                        expirationDate: addDays(10)
                                     }
                                 ]
                             },
@@ -117,6 +137,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 5,
                                         unit: "count",
                                         expirationDate: addDays(28)
+                                    },
+                                    {
+                                        quantity: 3,
+                                        unit: "count",
+                                        expirationDate: addDays(14)
                                     }
                                 ]
                             }
@@ -132,6 +157,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 1,
                                         unit: "gallon",
                                         expirationDate: addDays(14)
+                                    },
+                                    {
+                                        quantity: 0.5,
+                                        unit: "gallon",
+                                        expirationDate: addDays(7)
                                     }
                                 ]
                             },
@@ -142,6 +172,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 2,
                                         unit: "sticks",
                                         expirationDate: addMonths(1)
+                                    },
+                                    {
+                                        quantity: 1,
+                                        unit: "stick",
+                                        expirationDate: addDays(20)
                                     }
                                 ]
                             },
@@ -188,6 +223,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 5,
                                         unit: "lbs",
                                         expirationDate: addYears(1)
+                                    },
+                                    {
+                                        quantity: 2,
+                                        unit: "lbs",
+                                        expirationDate: addMonths(6)
                                     }
                                 ]
                             },
@@ -198,6 +238,11 @@ const userSchema = new mongoose.Schema({
                                         quantity: 3,
                                         unit: "pack",
                                         expirationDate: addYears(1)
+                                    },
+                                    {
+                                        quantity: 1,
+                                        unit: "pack",
+                                        expirationDate: addMonths(3)
                                     }
                                 ]
                             },
