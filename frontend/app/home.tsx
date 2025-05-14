@@ -3,26 +3,8 @@ import { useRouter } from "expo-router";
 import { useEffect, useState, useRef } from "react";
 import { fetchUserData } from "../src/api/auth";
 import { Ionicons } from '@expo/vector-icons';
+import { User, Batch, Ingredient, Category } from "../src/types/kitchen";
 
-interface User {
-  name: string;
-  email: string;
-  kitchenStock: {
-    [key: string]: {
-      exclude: boolean;
-      ingredients: {
-        [key: string]: {
-          exclude: boolean;
-          batches: Array<{
-            quantity: number;
-            unit: string;
-            expirationDate?: Date;
-          }>;
-        };
-      };
-    };
-  };
-}
 
 const formatDate = (date: Date) => {
   const now = new Date();
@@ -84,11 +66,7 @@ export default function HomeScreen() {
     });
   };
 
-  const renderBatch = (batch: {
-    quantity: number;
-    unit: string;
-    expirationDate?: Date;
-  }) => {
+  const renderBatch = (batch: Batch) => {
     const dateInfo = batch.expirationDate ? formatDate(batch.expirationDate) : null;
     
     return (
@@ -105,14 +83,7 @@ export default function HomeScreen() {
     );
   };
 
-  const renderIngredient = (name: string, ingredient: {
-    exclude: boolean;
-    batches: Array<{
-      quantity: number;
-      unit: string;
-      expirationDate?: Date;
-    }>;
-  }) => (
+  const renderIngredient = (name: string, ingredient: Ingredient) => (
     <View key={name} style={styles.ingredientContainer}>
       <View style={styles.ingredientHeader}>
         <TouchableOpacity style={styles.checkbox} />
@@ -128,19 +99,7 @@ export default function HomeScreen() {
     </View>
   );
 
-  const renderCategory = (name: string, category: {
-    exclude: boolean;
-    ingredients: {
-      [key: string]: {
-        exclude: boolean;
-        batches: Array<{
-          quantity: number;
-          unit: string;
-          expirationDate?: Date;
-        }>;
-      };
-    };
-  }) => {
+  const renderCategory = (name: string, category: Category) => {
     const ingredientCount = Object.keys(category.ingredients).length;
     const isExpanded = expandedCategories[name] ?? true;
     
@@ -253,21 +212,25 @@ const styles = StyleSheet.create({
     paddingVertical: 4
   },
   categoryName: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "600",
     flex: 1,
     marginLeft: 10,
     color: "#333333"
   },
   categorySubtext: {
-    fontSize: 14,
+    fontSize: 18,
     color: "#666666",
-    marginLeft: 34,
+    marginLeft: 2,
     marginBottom: 12
   },
   ingredientContainer: {
-    marginLeft: 34,
-    marginBottom: 12
+    marginLeft: 2,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#666666",
+    borderRadius: 8,
+    padding: 10
   },
   ingredientHeader: {
     flexDirection: "row",
@@ -275,7 +238,7 @@ const styles = StyleSheet.create({
     marginBottom: 4
   },
   ingredientName: {
-    fontSize: 16,
+    fontSize: 24,
     marginLeft: 10,
     color: "#333333"
   },
@@ -289,11 +252,11 @@ const styles = StyleSheet.create({
     gap: 8
   },
   batchText: {
-    fontSize: 14,
+    fontSize: 20,
     color: "#666666"
   },
   expirationText: {
-    fontSize: 12,
+    fontSize: 18,
     fontStyle: 'italic'
   },
   checkbox: {
