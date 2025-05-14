@@ -21,7 +21,7 @@ const CookEasyWelcomeScreen = () => {
 
       <TouchableOpacity 
         style={styles.loginButton}
-        onPress={() => router.push('/login')} // Navigate to the register page
+        onPress={() => router.push('/login')} // Navigate to the login page
         >
         <Text style={styles.loginText}>🍴 Login</Text>
       </TouchableOpacity>
