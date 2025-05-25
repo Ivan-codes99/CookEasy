@@ -69,7 +69,13 @@ export default function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff", padding: 50 },
+  container: { 
+    flex: 1, 
+    justifyContent: "flex-start", 
+    alignItems: "center", 
+    backgroundColor: "#fff", 
+    padding: 50 
+  },
   title: { fontSize: 36, fontWeight: "bold", marginBottom: 20, color: "lightcoral" },
   input: {
     backgroundColor: "#FFDAB9",
